@@ -2,13 +2,16 @@ package com.nopCommerce.admin;
 
 import java.util.Random;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
 import commons.PageGeneratorManager;
+import enviromentConfig.Enviroment;
 import pageObjects.nopCommerce.admin.AddNewAddressPO;
 import pageObjects.nopCommerce.admin.AddNewCustomerPO;
 import pageObjects.nopCommerce.admin.CustomerDetailPO;
@@ -17,6 +20,7 @@ import pageObjects.nopCommerce.admin.HomepageAdminPO;
 import pageObjects.nopCommerce.admin.LoginAdminPO;
 
 public class Module_02_Customer extends BaseTest {
+	Enviroment enviroment;
 	WebDriver driver;
 	HomepageAdminPO homePage;
 	LoginAdminPO adminLoginPage;
@@ -29,10 +33,13 @@ public class Module_02_Customer extends BaseTest {
 	String country, city, address1, address2, zipNumber, phoneNumber, faxNumber, editCountry, editState, editCity,
 			editAddress1, editAddress2, editZipNumber, editPhoneNumber, editFaxNumber;
 
-	@Parameters({ "browser", "url" })
+	@Parameters({ "envName", "severName", "browser", "ipAddress", "portNumber", "osName" })
 	@BeforeClass
-	public void BeforeClass(String browserName, String appUrl) {
-
+	public void BeforeClass(@Optional("local") String envName, @Optional("testing") String severName,
+			@Optional("chrome") String browserName, @Optional("localhost") String ipAddress,
+			@Optional("4444") String portNumber, @Optional("Windows 10") String osName) {
+		ConfigFactory.setProperty("env", severName);
+		enviroment = ConfigFactory.create(Enviroment.class);
 		emailAddress = "automationfc" + getRandomNumber() + "@gmail.com";
 		Password = "Automation123";
 		Firstname = "Automation";
@@ -66,14 +73,15 @@ public class Module_02_Customer extends BaseTest {
 		editPhoneNumber = "0987654666";
 		editFaxNumber = "+4416199998888";
 
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "' ");
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '"
+				+ enviroment.adminAppUrl() + "' ");
 
-		driver = getBrowserDriver(browserName, appUrl);
+		driver = getBrowserDriver(envName, enviroment.adminAppUrl(), browserName, ipAddress, portNumber, osName);
 		adminLoginPage = PageGeneratorManager.getLoginAdminPage(driver);
 
 		log.info("Pre-condition - Step 02: Login with Admin account");
-		adminLoginPage.enterTextToTextboxByName(driver, "Email", "admin@yourstore.com");
-		adminLoginPage.enterTextToTextboxByName(driver, "Password", "admin");
+		adminLoginPage.enterTextToTextboxByName(driver, "Email", enviroment.adminAppname());
+		adminLoginPage.enterTextToTextboxByName(driver, "Password", enviroment.adminAppPassword());
 		adminLoginPage.clickToButtonByText(driver, "Log in");
 		homePage = PageGeneratorManager.gethomepageAdmin(driver);
 
@@ -135,12 +143,13 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
 		log.info("TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page");
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Name", "1"),
-				Firstname + " " + Lastname);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Customer roles", "1"),
-				customerRole);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Company name", "1"), company);
-		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver, "Active", "1", "true"));
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Customer roles", "1"), customerRole);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Company name", "1"), company);
+		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver,"customers-grid_wrapper", "Active", "1", "true"));
 
 	}
 
@@ -156,12 +165,13 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
 		log.info("TC_08 - Step 04: Verify customer info");
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Name", "1"),
-				Firstname + " " + Lastname);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Customer roles", "1"),
-				customerRole);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Company name", "1"), company);
-		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver, "Active", "1", "true"));
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Customer roles", "1"), customerRole);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Company name", "1"), company);
+		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver,"customers-grid_wrapper", "Active", "1", "true"));
 	}
 
 	@Test
@@ -179,12 +189,13 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
 		log.info("TC_09 - Step 05: Verify customer info");
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Name", "1"),
-				Firstname + " " + Lastname);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Customer roles", "1"),
-				customerRole);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Company name", "1"), company);
-		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver, "Active", "1", "true"));
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Customer roles", "1"), customerRole);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Company name", "1"), company);
+		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver,"customers-grid_wrapper", "Active", "1", "true"));
 
 	}
 
@@ -200,12 +211,13 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
 		log.info("TC_10 - Step 04: Verify customer info");
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Name", "1"),
-				Firstname + " " + Lastname);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Customer roles", "1"),
-				customerRole);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Company name", "1"), company);
-		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver, "Active", "1", "true"));
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Customer roles", "1"), customerRole);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Company name", "1"), company);
+		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver, "customers-grid_wrapper", "Active", "1", "true"));
 		CustomerListPage.refreshCurrentPage(driver);
 	}
 
@@ -226,12 +238,13 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
 		log.info("TC_11 - Step 04: Verify customer info");
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Name", "1"),
-				Firstname + " " + Lastname);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Customer roles", "1"),
-				customerRole);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Company name", "1"), company);
-		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver, "Active", "1", "true"));
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Customer roles", "1"), customerRole);
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"customers-grid_wrapper", "Company name", "1"), company);
+		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver,"customers-grid_wrapper", "Active", "1", "true"));
 
 	}
 
@@ -277,13 +290,14 @@ public class Module_02_Customer extends BaseTest {
 
 		log.info("TC_12 - Step 09: Verify info displayed correctly");
 
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Name", "1"),
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,"customers-grid_wrapper", "Name", "1"),
 				editFirstname + " " + editLastname);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Customer roles", "1"),
+		verifyEquals(
+				CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,"customers-grid_wrapper", "Customer roles", "1"),
 				customerRole);
-		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Company name", "1"),
+		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,"customers-grid_wrapper", "Company name", "1"),
 				editCompany);
-		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver, "Active", "1", "true"));
+		verifyTrue(CustomerListPage.ischeckIconDisplayed(driver,"customers-grid_wrapper", "Active", "1", "true"));
 	}
 
 	@Test
@@ -449,20 +463,20 @@ public class Module_02_Customer extends BaseTest {
 
 		log.info("TC_15 - Step 04: Click Search button");
 		CustomerListPage.clickToButtonByText(driver, "Search");
-		
+
 		log.info("TC_15 - Step 05: Click Edit button");
 		CustomerListPage.clickToLinkButtonAtTableByRowIndex(driver, "Edit", "1");
 		CustomerDetailPage = PageGeneratorManager.getCustomerDetailPage(driver);
-		
+
 		log.info("TC_15 - Step 06: Click Extend button");
 		CustomerDetailPage.clickToExtendButtonByCardName(driver, "Addresses");
-		
+
 		log.info("TC_15 - Step 07: Click Delete button");
 		CustomerDetailPage.clickToLinkButtonAtTableByRowIndex(driver, "Delete", "1");
-		
+
 		log.info("TC_15 - Step 08: Accept alert");
 		CustomerDetailPage.acceptAlert(driver);
-		
+
 		log.info("TC_15 - Step 09: Verify No data message in table");
 		verifyEquals(CustomerDetailPage.getEmptyMsgAtTableByText(driver, "customer-address"),
 				"No data available in table");

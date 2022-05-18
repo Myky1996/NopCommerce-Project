@@ -3,13 +3,18 @@ package com.nopCommerce.user;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.nopCommerce.common.Common_01_Register_to_system;
+
 import commons.BaseTest;
 import commons.PageGeneratorManager;
+import enviromentConfig.Enviroment;
 import pageObjects.nopCommerce.user.AddYourReviewPO;
 import pageObjects.nopCommerce.user.HomePageObject;
 import pageObjects.nopCommerce.user.LoginPO;
@@ -20,6 +25,7 @@ import pageObjects.nopCommerce.user.TopMenuSubPagePO;
 import pageObjects.nopCommerce.user.registerPO;
 
 public class Module_05_Sort_Display_Paging extends BaseTest {
+	Enviroment enviroment;
 	WebDriver driver;
 	HomePageObject homePage;
 	registerPO registerPage;
@@ -29,34 +35,32 @@ public class Module_05_Sort_Display_Paging extends BaseTest {
 	ProductDetailPO productDetailPage;
 	AddYourReviewPO addYourReviewPage;
 	SearchPO searchPage;
-	String password, existingEmail, newPassword;
+	String password, emailAddress, newPassword;
 
-	@Parameters({ "browser", "url" })
+	@Parameters({ "envName", "severName", "browser", "ipAddress", "portNumber", "osName" })
 	@BeforeClass
-	public void BeforeClass(String browserName, String appUrl) {
-
-		existingEmail = "kinu@yopmail.com";
-		password = "kinu@yopmail.com";
-		newPassword = "buinhuhoa";
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "' ");
-
-		driver = getBrowserDriver(browserName, appUrl);
+	public void BeforeClass(@Optional("local") String envName, @Optional("testing") String severName,
+			@Optional("chrome") String browserName, @Optional("localhost") String ipAddress,
+			@Optional("4444") String portNumber, @Optional("Windows 10") String osName) {
+		ConfigFactory.setProperty("env", severName);
+		enviroment = ConfigFactory.create(Enviroment.class);
+		emailAddress = Common_01_Register_to_system.emailAddress;
+		password = Common_01_Register_to_system.password;
+		
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + enviroment.userAppUrl() + "' ");
+		driver = getBrowserDriver(envName, enviroment.userAppUrl(), browserName, ipAddress, portNumber, osName);
 		homePage = PageGeneratorManager.getHompageObject(driver);
 
 		log.info("Pre-condition - Step 02: Open 'Login' page");
 		homePage.openHeaderFooterPageByText(driver, "Log in");
 		loginPage = PageGeneratorManager.getLoginPageObject(driver);
 
-		log.info("Register - Step 01: Fill in email textbox");
-		loginPage.enterTextToTextboxByName(driver, "Email", existingEmail);
+		log.info("Pre-condition - Step 03: Set cookies and reload page");
+		loginPage.setCookies(driver, Common_01_Register_to_system.loginPageCookie);
 
-		log.info("Register - Step 02: Fill in password textbox");
-		loginPage.enterTextToTextboxByName(driver, "Password", password);
-
-		log.info("Register - Step 03: Click 'Login' button");
-		loginPage.clickToButtonByText(driver, "Log in");
-
+		loginPage.refreshCurrentPage(driver);
 		homePage = PageGeneratorManager.getHompageObject(driver);
+		loginPage.closeNotiBarByText(driver);
 
 		homePage.openTopMenuSubPageByText(driver, "Computers", "Notebooks");
 
@@ -112,18 +116,19 @@ public class Module_05_Sort_Display_Paging extends BaseTest {
 
 		log.info("Verify 6 items or less than 6 item per page");
 		verifyTrue(homePage.isNumberOfProductsCorrect(driver, 6));
-		
+
 		log.info("Verify paging is not displayed");
 		verifyTrue(homePage.isPagingUndisplayed(driver));
 
 	}
+
 	@Test
 	public void TC_07_Display_9_items_per_page() {
 		homePage.selectOptionInDropdownByText(driver, "products-pagesize", "9");
 
 		log.info("Verify 9 items or less than 9 item per page");
 		verifyTrue(homePage.isNumberOfProductsCorrect(driver, 9));
-		
+
 		log.info("Verify paging is not displayed");
 		verifyTrue(homePage.isPagingUndisplayed(driver));
 	}

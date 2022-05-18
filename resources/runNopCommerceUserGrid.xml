@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="NopCommerce">
+	<parameter name="severName" value="testing" />
+	<parameter name="envName" value="grid" />
+	<parameter name="osName" value="Windows 10" />
+
+	<listeners>
+		<listener class-name="commons.MethodListener" />
+
+	</listeners>
+
+	<test name="Run on Chrome">
+		<parameter name="browser" value="chrome" />
+		<parameter name="ipAddress" value="192.168.48.102" />
+		<parameter name="portNumber" value="4445" />
+		<classes>
+			<class name="com.nopCommerce.user.Module_01_Register" />
+
+			<!-- <class name="com.nopCommerce.user.Module_07_Order" /> -->
+			-->
+		</classes>
+	</test>
+
+	<test name="Run on Firefox">
+		<parameter name="browser" value="firefox" />
+		<parameter name="ipAddress" value="192.168.48.102" />
+		<parameter name="portNumber" value="4446" />
+		<classes>
+			<class name="com.nopCommerce.user.Module_01_Register" />
+
+			<!-- <class name="com.nopCommerce.user.Module_07_Order" /> -->
+		</classes>
+	</test>
+</suite>

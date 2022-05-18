@@ -6,6 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="library"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="lib" path="library/bcpkix-jdk15on-1.64.jar"/>
 	<classpathentry kind="lib" path="library/bcprov-jdk15on-1.64.jar"/>
 	<classpathentry kind="lib" path="library/checker-qual-3.8.0.jar"/>
@@ -44,6 +45,11 @@
 	<classpathentry kind="lib" path="library/snakeyaml-1.23.jar"/>
 	<classpathentry kind="lib" path="library/testng-6.14.3.jar"/>
 	<classpathentry kind="lib" path="library/webdrivermanager-5.0.3.jar"/>
+	<classpathentry kind="lib" path="library/hamcrest-all-1.3.jar"/>
+	<classpathentry kind="lib" path="library/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="library/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="library/mockito-core-2.23.4.jar"/>
+	<classpathentry kind="lib" path="library/owner-1.0.12.jar"/>
 	<classpathentry kind="src" path="interfaces"/>
 	<classpathentry kind="src" path="actions"/>
 	<classpathentry kind="src" path="testcases"/>

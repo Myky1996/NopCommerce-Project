@@ -2,13 +2,18 @@ package com.nopCommerce.user;
 
 import java.util.Random;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.nopCommerce.common.Common_01_Register_to_system;
+
 import commons.BaseTest;
 import commons.PageGeneratorManager;
+import enviromentConfig.Enviroment;
 import pageObjects.nopCommerce.user.AddYourReviewPO;
 import pageObjects.nopCommerce.user.HomePageObject;
 import pageObjects.nopCommerce.user.LoginPO;
@@ -18,6 +23,7 @@ import pageObjects.nopCommerce.user.TopMenuSubPagePO;
 import pageObjects.nopCommerce.user.registerPO;
 
 public class Module_03_My_Account extends BaseTest {
+	Enviroment enviroment;
 	WebDriver driver;
 	HomePageObject homePage;
 	registerPO registerPage;
@@ -26,38 +32,39 @@ public class Module_03_My_Account extends BaseTest {
 	MyAccountPO myAccountPage;
 	ProductDetailPO productDetailPage;
 	AddYourReviewPO addYourReviewPage;
-	String password, existingEmail, newPassword;
+	String password, emailAddress, newPassword;
 
-	@Parameters({ "browser", "url" })
+	@Parameters({ "envName", "severName", "browser", "ipAddress", "portNumber", "osName" })
 	@BeforeClass
-	public void BeforeClass(String browserName, String appUrl) {
-
-		existingEmail = "onichan6@yopmail.com";
-		password = "onichan6@yopmail.com";
+	public void BeforeClass(@Optional("local") String envName, @Optional("testing") String severName,
+			@Optional("chrome") String browserName, @Optional("localhost") String ipAddress,
+			@Optional("4444") String portNumber, @Optional("Windows 10") String osName) {
+		ConfigFactory.setProperty("env", severName);
+		enviroment = ConfigFactory.create(Enviroment.class);
+		
+		emailAddress = Common_01_Register_to_system.emailAddress;
+		password = Common_01_Register_to_system.password;
 		newPassword = "buinhuhoa";
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "' ");
 
-		driver = getBrowserDriver(browserName, appUrl);
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + enviroment.userAppUrl()
+				+ "' ");
+		driver = getBrowserDriver(envName, enviroment.userAppUrl(), browserName, ipAddress, portNumber, osName);
 		homePage = PageGeneratorManager.getHompageObject(driver);
 
 		log.info("Pre-condition - Step 02: Open 'Login' page");
 		homePage.openHeaderFooterPageByText(driver, "Log in");
 		loginPage = PageGeneratorManager.getLoginPageObject(driver);
 
-		log.info("Register - Step 01: Fill in email textbox");
-		loginPage.enterTextToTextboxByName(driver, "Email", existingEmail);
+		log.info("Pre-condition - Step 03: Set cookies and reload page");
+		loginPage.setCookies(driver, Common_01_Register_to_system.loginPageCookie);
 
-		log.info("Register - Step 02: Fill in password textbox");
-		loginPage.enterTextToTextboxByName(driver, "Password", password);
-
-		log.info("Register - Step 03: Click 'Login' button");
-		loginPage.clickToButtonByText(driver, "Log in");
-
+		loginPage.refreshCurrentPage(driver);
 		homePage = PageGeneratorManager.getHompageObject(driver);
+		loginPage.closeNotiBarByText(driver);
 
 	}
 
-//	@Test
+	@Test
 	public void TC_01_Customer_info() {
 		log.info("Customer info - Step 00: Open My account page");
 		homePage.openHeaderFooterPageByText(driver, "My account");
@@ -87,7 +94,7 @@ public class Module_03_My_Account extends BaseTest {
 		myAccountPage.clickToButtonByText(driver, "Save");
 
 		log.info("Customer info - Step 08: Verify updated info");
-		verifyTrue(myAccountPage.isRadiobuttonSelected(driver, "gender-female"));
+		verifyTrue(myAccountPage.isRadiobuttonSelected(driver, "Male"));
 		verifyEquals(myAccountPage.getTextboxValueByName(driver, "FirstName"), "Automation");
 		verifyEquals(myAccountPage.getTextboxValueByName(driver, "LastName"), "FC");
 		verifyEquals(myAccountPage.getSelectedOption(driver, "DateOfBirthDay"), "1");
@@ -97,7 +104,7 @@ public class Module_03_My_Account extends BaseTest {
 		verifyEquals(myAccountPage.getTextboxValueByName(driver, "Company"), "Automation FC");
 	}
 
-//	@Test
+	@Test
 	public void TC_02_Address() {
 		myAccountPage.openSidePageByText(driver, "Addresses");
 		myAccountPage.clickToButtonByText(driver, "Add new");
@@ -121,7 +128,7 @@ public class Module_03_My_Account extends BaseTest {
 
 	}
 
-//	@Test
+	// @Test
 	public void TC_03_Change_Password() {
 
 		log.info("Change password - Step 01: Open changep password tab");
@@ -140,10 +147,11 @@ public class Module_03_My_Account extends BaseTest {
 		myAccountPage.clickToButtonByText(driver, "Change password");
 
 		log.info("Customer info - Step 06: Verify success message");
-		verifyEquals(myAccountPage.getSuccessMsgOnNotiBarByClass(driver,"bar-notification success"), "Password was changed");
+		verifyEquals(myAccountPage.getSuccessMsgOnNotiBarByClass(driver, "bar-notification success"),
+				"Password was changed");
 
 		log.info("Customer info - Step 06: Close success message");
-		myAccountPage.closeSuccesNotiBarByText(driver);
+		myAccountPage.closeNotiBarByText(driver);
 
 		log.info("Customer info - Step 07: Logout");
 		myAccountPage.openHeaderFooterPageByText(driver, "Log out");
@@ -154,7 +162,7 @@ public class Module_03_My_Account extends BaseTest {
 
 		loginPage = PageGeneratorManager.getLoginPageObject(driver);
 
-		loginPage.enterTextToTextboxByName(driver, "Email", existingEmail);
+		loginPage.enterTextToTextboxByName(driver, "Email", emailAddress);
 
 		loginPage.enterTextToTextboxByName(driver, "Password", password);
 

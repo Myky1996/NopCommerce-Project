@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="NopCommerce">
+	<parameter name="severName" value="testing" />
+	<parameter name="envName" value="saucelab" />
+	<parameter name="osName" value="Windows 10" />
+
+	<listeners>
+		<listener class-name="commons.MethodListener" />
+
+	</listeners>
+
+	<test name="Run on Chrome">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.nopCommerce.user.Module_01_Register" />
+
+			<!-- <class name="com.nopCommerce.user.Module_07_Order" /> -->
+			-->
+		</classes>
+	</test>
+
+
+	<!-- <test name="Run on Firefox"> <parameter name = "browser" value ="firefox"/> 
+		<classes> <class name="com.nopCommerce.user.Module_07_Order"/> </classes> 
+		</test> -->
+
+</suite>

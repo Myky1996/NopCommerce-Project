@@ -1,0 +1,728 @@
+[INFO ] [2022-05-08 16:23:28,652] ---------- START delete file in folder ----------
+[INFO ] [2022-05-08 16:23:28,654] ---------- END delete file in folder ----------
+[INFO ] [2022-05-08 16:23:28,793] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-08 16:23:40,900] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-08 16:23:49,342] Pre-condition - Step 03: Open Customer page
+[INFO ] [2022-05-08 16:33:50,403] ---------- START delete file in folder ----------
+[INFO ] [2022-05-08 16:33:50,405] ---------- END delete file in folder ----------
+[INFO ] [2022-05-08 16:33:50,524] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-08 16:33:59,683] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-08 16:34:07,665] Pre-condition - Step 03: Open Customer page
+[INFO ] [2022-05-08 16:34:10,761] TC_07 Step 01: Click 'Add new' button
+[INFO ] [2022-05-08 16:34:18,097] TC_07 - Step 02: Enter info in fields
+[INFO ] [2022-05-08 16:34:23,141] TC_07 - Step 03: Click Save and Continue button
+[INFO ] [2022-05-08 16:34:32,804] TC_07 - Step 04: Verify customer is added successfully
+[INFO ] [2022-05-08 16:34:32,872]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:32,934]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:32,988]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:33,045]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:33,115]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:33,160]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:33,214]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:33,286]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:33,346]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:33,414]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:34:33,414] TC_07 - Step 05: Click Go back to customer list
+[INFO ] [2022-05-08 16:34:41,379] TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page
+[INFO ] [2022-05-08 16:35:12,026] TC_08 - Step 01: Enter email address into search field
+[INFO ] [2022-05-08 16:35:12,395] TC_08 - Step 02: Select guests tag
+[INFO ] [2022-05-08 16:35:14,919] TC_08 - Step 03: Click search button
+[INFO ] [2022-05-08 16:35:17,066] TC_08 - Step 04: Verify customer info
+[INFO ] [2022-05-08 16:35:47,714] TC_09 - Step 01: Enter firstname into Firstname textbox
+[INFO ] [2022-05-08 16:35:48,067] TC_09 - Step 02: Enter Lastname into Lastname textbox
+[INFO ] [2022-05-08 16:35:48,370] TC_09 - Step 03: Select guests tag
+[INFO ] [2022-05-08 16:35:50,956] TC_09 - Step 04: Click search button
+[INFO ] [2022-05-08 16:35:53,096] TC_09 - Step 05: Verify customer info
+[INFO ] [2022-05-08 16:36:23,721] TC_10 - Step 01: Enter text into Company textbox
+[INFO ] [2022-05-08 16:36:24,231] TC_10 - Step 02: Select guests tag
+[INFO ] [2022-05-08 16:36:26,894] TC_10 - Step 03: Click search button
+[INFO ] [2022-05-08 16:36:29,054] TC_10 - Step 04: Verify customer info
+[INFO ] [2022-05-08 16:36:59,718] TC_11 - Step 01: Enter info into search fields
+[INFO ] [2022-05-08 16:37:05,001] TC_11 - Step 02: Select guests tag
+[INFO ] [2022-05-08 16:37:07,599] TC_11 - Step 03: Click search button
+[INFO ] [2022-05-08 16:37:09,731] TC_11 - Step 04: Verify customer info
+[INFO ] [2022-05-08 16:37:40,373] TC_12 - Step 01: Click Edit link
+[INFO ] [2022-05-08 16:37:41,938] TC_12 - Step 02: Click Extend button
+[INFO ] [2022-05-08 16:37:42,757] TC_12 - Step 03: Enter text into textbox
+[INFO ] [2022-05-08 16:37:44,402] TC_12 - Step 04: Click Save button
+[INFO ] [2022-05-08 16:37:48,556] TC_12 - Step 05: Verify success message display
+[INFO ] [2022-05-08 16:37:48,621]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:37:48,621] TC_12 - Step 06: Enter text into search fields
+[INFO ] [2022-05-08 16:37:53,777] TC_12 - Step 07: Select Guest tag
+[INFO ] [2022-05-08 16:37:56,520] TC_12 - Step 08: Click search button
+[INFO ] [2022-05-08 16:37:58,688] TC_12 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-08 16:38:29,285] TC_13 - Step 01: Click Edit link
+[INFO ] [2022-05-08 16:38:30,409] TC_13 - Step 02: Click Extend button
+[INFO ] [2022-05-08 16:38:31,500] TC_13 - Step 03: Click 'Add new address' button
+[INFO ] [2022-05-08 16:38:38,681] TC_13 - Step 04: Enter info into textboxes
+[INFO ] [2022-05-08 16:38:42,710] TC_13 - Step 05: Click Save button
+[INFO ] [2022-05-08 16:38:49,989] TC_13 - Step 06: Verify success message displayed
+[INFO ] [2022-05-08 16:38:50,091]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:38:50,104] TC_13 - Step 07: Click Back to customer details link
+[INFO ] [2022-05-08 16:38:53,235] TC_13 - Step 08: Click extend button
+[INFO ] [2022-05-08 16:38:53,296] TC_13 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-08 16:39:08,440]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:08,532]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:08,634]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:08,733]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:08,883]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:09,054]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:09,059] TC_14 - Step 01: Open Customer page
+[INFO ] [2022-05-08 16:39:10,344] TC_14 - Step 02: Click Extend button
+[INFO ] [2022-05-08 16:39:10,980] TC_14 - Step 03: Enter info into textboxes
+[INFO ] [2022-05-08 16:39:18,025] TC_14 - Step 04: Select Guest tag
+[INFO ] [2022-05-08 16:39:20,750] TC_14 - Step 05: Click search button
+[INFO ] [2022-05-08 16:39:22,892] TC_14 - Step 06: Click Edit button
+[INFO ] [2022-05-08 16:39:23,886] TC_14 - Step 07: Click Extend button
+[INFO ] [2022-05-08 16:39:24,776] TC_14 - Step 08: Click Edit button
+[INFO ] [2022-05-08 16:39:26,045] TC_14 - Step 09: Enter text into textboxes
+[INFO ] [2022-05-08 16:39:33,668] TC_14 - Step 10: Click Save button
+[INFO ] [2022-05-08 16:39:37,253] TC_14 - Step 11: Verify success message displayed
+[INFO ] [2022-05-08 16:39:37,324]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:37,324] TC_14 - Step 12: Click Go back to customer details link
+[INFO ] [2022-05-08 16:39:40,715] TC_14 - Step 13: Click Extend button
+[INFO ] [2022-05-08 16:39:40,785] TC_14 - Step 14: Verify info displayed correctly
+[INFO ] [2022-05-08 16:39:55,891]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:55,977]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:56,068]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:56,151]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:56,274]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:56,414]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 16:39:56,427] TC_15 - Step 01: Open Customer page
+[INFO ] [2022-05-08 16:39:58,217] TC_15 - Step 02: Click search button
+[INFO ] [2022-05-08 16:40:03,304] TC_15 - Step 03: Select Guest tag
+[INFO ] [2022-05-08 16:40:05,978] TC_15 - Step 04: Click Search button
+[INFO ] [2022-05-08 16:40:08,106] TC_15 - Step 05: Click Edit button
+[INFO ] [2022-05-08 16:40:09,205] TC_15 - Step 06: Click Extend button
+[INFO ] [2022-05-08 16:40:10,065] TC_15 - Step 07: Click Delete button
+[INFO ] [2022-05-08 16:40:10,316] TC_15 - Step 08: Accept alert
+[INFO ] [2022-05-08 16:40:12,401] TC_15 - Step 09: Verify No data message in table
+[INFO ] [2022-05-08 16:40:12,465]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:16:52,849] ---------- START delete file in folder ----------
+[INFO ] [2022-05-08 17:16:52,851] ---------- END delete file in folder ----------
+[INFO ] [2022-05-08 17:16:52,996] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-08 17:17:04,744] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-08 17:17:13,646] Pre-condition - Step 03: Open Customer page
+[INFO ] [2022-05-08 17:17:16,352] TC_07 Step 01: Click 'Add new' button
+[INFO ] [2022-05-08 17:17:21,524] TC_07 - Step 02: Enter info in fields
+[INFO ] [2022-05-08 17:17:26,017] TC_07 - Step 03: Click Save and Continue button
+[INFO ] [2022-05-08 17:17:34,848] TC_07 - Step 04: Verify customer is added successfully
+[INFO ] [2022-05-08 17:17:35,024]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,090]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,155]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,209]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,292]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,366]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,441]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,539]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,601]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,662]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:35,662] TC_07 - Step 05: Click Go back to customer list
+[INFO ] [2022-05-08 17:17:44,312] TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page
+[INFO ] [2022-05-08 17:17:44,420]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:44,508]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:44,642]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:44,664] TC_08 - Step 01: Enter email address into search field
+[INFO ] [2022-05-08 17:17:45,040] TC_08 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:17:47,628] TC_08 - Step 03: Click search button
+[INFO ] [2022-05-08 17:17:49,823] TC_08 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:17:49,930]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:50,100]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:50,216]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:50,227] TC_09 - Step 01: Enter firstname into Firstname textbox
+[INFO ] [2022-05-08 17:17:50,576] TC_09 - Step 02: Enter Lastname into Lastname textbox
+[INFO ] [2022-05-08 17:17:50,788] TC_09 - Step 03: Select guests tag
+[INFO ] [2022-05-08 17:17:53,276] TC_09 - Step 04: Click search button
+[INFO ] [2022-05-08 17:17:55,399] TC_09 - Step 05: Verify customer info
+[INFO ] [2022-05-08 17:17:55,473]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:55,562]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:55,630]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:17:55,635] TC_10 - Step 01: Enter text into Company textbox
+[INFO ] [2022-05-08 17:17:55,880] TC_10 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:17:58,443] TC_10 - Step 03: Click search button
+[INFO ] [2022-05-08 17:18:00,551] TC_10 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:18:00,617]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:18:00,700]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:18:00,797]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:18:00,803] TC_11 - Step 01: Enter info into search fields
+[INFO ] [2022-05-08 17:18:06,265] TC_11 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:18:09,056] TC_11 - Step 03: Click search button
+[INFO ] [2022-05-08 17:18:11,235] TC_11 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:18:11,309]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:18:11,392]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:18:11,517]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:18:11,529] TC_12 - Step 01: Click Edit link
+[INFO ] [2022-05-08 17:18:13,649] TC_12 - Step 02: Click Extend button
+[INFO ] [2022-05-08 17:18:14,924] TC_12 - Step 03: Enter text into textbox
+[INFO ] [2022-05-08 17:18:16,859] TC_12 - Step 04: Click Save button
+[INFO ] [2022-05-08 17:18:21,047] TC_12 - Step 05: Verify success message display
+[INFO ] [2022-05-08 17:18:21,114]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:18:21,114] TC_12 - Step 06: Enter text into search fields
+[INFO ] [2022-05-08 17:18:26,290] TC_12 - Step 07: Select Guest tag
+[INFO ] [2022-05-08 17:18:29,170] TC_12 - Step 08: Click search button
+[INFO ] [2022-05-08 17:18:31,324] TC_12 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-08 17:19:01,963] TC_13 - Step 01: Click Edit link
+[INFO ] [2022-05-08 17:19:32,561] TC_14 - Step 01: Open Customer page
+[INFO ] [2022-05-08 17:19:48,012] TC_15 - Step 01: Open Customer page
+[INFO ] [2022-05-08 17:19:49,562] TC_15 - Step 02: Click search button
+[INFO ] [2022-05-08 17:19:55,031] TC_15 - Step 03: Select Guest tag
+[INFO ] [2022-05-08 17:19:57,733] TC_15 - Step 04: Click Search button
+[INFO ] [2022-05-08 17:19:59,862] TC_15 - Step 05: Click Edit button
+[INFO ] [2022-05-08 17:20:01,081] TC_15 - Step 06: Click Extend button
+[INFO ] [2022-05-08 17:20:01,958] TC_15 - Step 07: Click Delete button
+[INFO ] [2022-05-08 17:24:17,344] ---------- START delete file in folder ----------
+[INFO ] [2022-05-08 17:24:17,346] ---------- END delete file in folder ----------
+[INFO ] [2022-05-08 17:24:17,491] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-08 17:24:25,673] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-08 17:24:32,214] Pre-condition - Step 03: Open Customer page
+[INFO ] [2022-05-08 17:24:35,104] TC_07 Step 01: Click 'Add new' button
+[INFO ] [2022-05-08 17:24:40,515] TC_07 - Step 02: Enter info in fields
+[INFO ] [2022-05-08 17:24:44,822] TC_07 - Step 03: Click Save and Continue button
+[INFO ] [2022-05-08 17:24:52,631] TC_07 - Step 04: Verify customer is added successfully
+[INFO ] [2022-05-08 17:24:52,699]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:52,765]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:52,813]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:52,921]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:52,968]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:53,016]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:53,062]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:53,125]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:53,213]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:53,270]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:24:53,271] TC_07 - Step 05: Click Go back to customer list
+[INFO ] [2022-05-08 17:25:01,304] TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page
+[INFO ] [2022-05-08 17:25:01,392]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:01,484]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:01,560]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:01,668]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:01,684] TC_08 - Step 01: Enter email address into search field
+[INFO ] [2022-05-08 17:25:01,939] TC_08 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:25:04,455] TC_08 - Step 03: Click search button
+[INFO ] [2022-05-08 17:25:06,604] TC_08 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:25:37,502] TC_09 - Step 01: Enter firstname into Firstname textbox
+[INFO ] [2022-05-08 17:25:38,306] TC_09 - Step 02: Enter Lastname into Lastname textbox
+[INFO ] [2022-05-08 17:25:38,788] TC_09 - Step 03: Select guests tag
+[INFO ] [2022-05-08 17:25:41,996] TC_09 - Step 04: Click search button
+[INFO ] [2022-05-08 17:25:44,330] TC_09 - Step 05: Verify customer info
+[INFO ] [2022-05-08 17:25:44,750]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:45,238]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:45,465]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:45,677]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:45,732] TC_10 - Step 01: Enter text into Company textbox
+[INFO ] [2022-05-08 17:25:46,643] TC_10 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:25:50,149] TC_10 - Step 03: Click search button
+[INFO ] [2022-05-08 17:25:52,753] TC_10 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:25:52,923]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:53,247]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:53,389]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:53,645]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:25:56,111] TC_11 - Step 01: Enter info into search fields
+[INFO ] [2022-05-08 17:26:02,920] TC_11 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:26:05,558] TC_11 - Step 03: Click search button
+[INFO ] [2022-05-08 17:26:07,687] TC_11 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:26:07,789]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:07,902]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:07,998]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:08,072]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:08,091] TC_12 - Step 01: Click Edit link
+[INFO ] [2022-05-08 17:26:09,439] TC_12 - Step 02: Click Extend button
+[INFO ] [2022-05-08 17:26:10,378] TC_12 - Step 03: Enter text into textbox
+[INFO ] [2022-05-08 17:26:11,926] TC_12 - Step 04: Click Save button
+[INFO ] [2022-05-08 17:26:15,434] TC_12 - Step 05: Verify success message display
+[INFO ] [2022-05-08 17:26:15,536]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:15,536] TC_12 - Step 06: Enter text into search fields
+[INFO ] [2022-05-08 17:26:20,941] TC_12 - Step 07: Select Guest tag
+[INFO ] [2022-05-08 17:26:23,538] TC_12 - Step 08: Click search button
+[INFO ] [2022-05-08 17:26:25,656] TC_12 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-08 17:26:25,721]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:25,794]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:25,890]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:25,959]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:25,963] TC_13 - Step 01: Click Edit link
+[INFO ] [2022-05-08 17:26:26,927] TC_13 - Step 02: Click Extend button
+[INFO ] [2022-05-08 17:26:27,793] TC_13 - Step 03: Click 'Add new address' button
+[INFO ] [2022-05-08 17:26:33,420] TC_13 - Step 04: Enter info into textboxes
+[INFO ] [2022-05-08 17:26:37,828] TC_13 - Step 05: Click Save button
+[INFO ] [2022-05-08 17:26:42,991] TC_13 - Step 06: Verify success message displayed
+[INFO ] [2022-05-08 17:26:43,050]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:26:43,051] TC_13 - Step 07: Click Back to customer details link
+[INFO ] [2022-05-08 17:26:46,105] TC_13 - Step 08: Click extend button
+[INFO ] [2022-05-08 17:26:46,152] TC_13 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-08 17:27:01,234]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:01,307]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:01,383]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:01,462]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:01,549]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:01,628]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:01,636] TC_14 - Step 01: Open Customer page
+[INFO ] [2022-05-08 17:27:02,664] TC_14 - Step 02: Click Extend button
+[INFO ] [2022-05-08 17:27:03,179] TC_14 - Step 03: Enter info into textboxes
+[INFO ] [2022-05-08 17:27:10,332] TC_14 - Step 04: Select Guest tag
+[INFO ] [2022-05-08 17:27:12,872] TC_14 - Step 05: Click search button
+[INFO ] [2022-05-08 17:27:14,996] TC_14 - Step 06: Click Edit button
+[INFO ] [2022-05-08 17:27:16,111] TC_14 - Step 07: Click Extend button
+[INFO ] [2022-05-08 17:27:17,004] TC_14 - Step 08: Click Edit button
+[INFO ] [2022-05-08 17:27:18,085] TC_14 - Step 09: Enter text into textboxes
+[INFO ] [2022-05-08 17:27:24,874] TC_14 - Step 10: Click Save button
+[INFO ] [2022-05-08 17:27:28,389] TC_14 - Step 11: Verify success message displayed
+[INFO ] [2022-05-08 17:27:28,451]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:28,466] TC_14 - Step 12: Click Go back to customer details link
+[INFO ] [2022-05-08 17:27:31,532] TC_14 - Step 13: Click Extend button
+[INFO ] [2022-05-08 17:27:31,592] TC_14 - Step 14: Verify info displayed correctly
+[INFO ] [2022-05-08 17:27:46,694]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:46,771]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:46,846]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:46,937]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:47,021]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:47,099]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:27:47,102] TC_15 - Step 01: Open Customer page
+[INFO ] [2022-05-08 17:27:48,152] TC_15 - Step 02: Click search button
+[INFO ] [2022-05-08 17:27:53,561] TC_15 - Step 03: Select Guest tag
+[INFO ] [2022-05-08 17:28:01,257] TC_15 - Step 04: Click Search button
+[INFO ] [2022-05-08 17:28:03,453] TC_15 - Step 05: Click Edit button
+[INFO ] [2022-05-08 17:28:05,353] TC_15 - Step 06: Click Extend button
+[INFO ] [2022-05-08 17:28:05,550] TC_15 - Step 07: Click Delete button
+[INFO ] [2022-05-08 17:28:05,791] TC_15 - Step 08: Accept alert
+[INFO ] [2022-05-08 17:28:07,835] TC_15 - Step 09: Verify No data message in table
+[INFO ] [2022-05-08 17:28:07,905]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:01,965] ---------- START delete file in folder ----------
+[INFO ] [2022-05-08 17:31:01,967] ---------- END delete file in folder ----------
+[INFO ] [2022-05-08 17:31:02,116] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-08 17:31:10,436] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-08 17:31:17,169] Pre-condition - Step 03: Open Customer page
+[INFO ] [2022-05-08 17:31:20,919] TC_07 Step 01: Click 'Add new' button
+[INFO ] [2022-05-08 17:31:28,478] TC_07 - Step 02: Enter info in fields
+[INFO ] [2022-05-08 17:31:36,041] TC_07 - Step 03: Click Save and Continue button
+[INFO ] [2022-05-08 17:31:44,672] TC_07 - Step 04: Verify customer is added successfully
+[INFO ] [2022-05-08 17:31:48,106]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:48,585]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:48,718]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:48,962]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:49,196]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:49,506]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:49,669]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:50,072]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:50,400]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:51,516]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:31:51,522] TC_07 - Step 05: Click Go back to customer list
+[INFO ] [2022-05-08 17:33:06,096] TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page
+[INFO ] [2022-05-08 17:33:06,609]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:06,717]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:07,102]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:07,407]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:07,502] TC_08 - Step 01: Enter email address into search field
+[INFO ] [2022-05-08 17:33:09,436] TC_08 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:33:13,911] TC_08 - Step 03: Click search button
+[INFO ] [2022-05-08 17:33:18,231] TC_08 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:33:19,126]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:19,642]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:19,954]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:20,120]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:20,293] TC_09 - Step 01: Enter firstname into Firstname textbox
+[INFO ] [2022-05-08 17:33:21,264] TC_09 - Step 02: Enter Lastname into Lastname textbox
+[INFO ] [2022-05-08 17:33:21,751] TC_09 - Step 03: Select guests tag
+[INFO ] [2022-05-08 17:33:28,332] TC_09 - Step 04: Click search button
+[INFO ] [2022-05-08 17:33:33,563] TC_09 - Step 05: Verify customer info
+[INFO ] [2022-05-08 17:33:34,381]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:35,210]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:35,813]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:36,786]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:36,827] TC_10 - Step 01: Enter text into Company textbox
+[INFO ] [2022-05-08 17:33:42,138] TC_10 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:33:46,153] TC_10 - Step 03: Click search button
+[INFO ] [2022-05-08 17:33:48,665] TC_10 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:33:48,876]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:48,963]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:49,097]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:49,242]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:33:57,634] TC_11 - Step 01: Enter info into search fields
+[INFO ] [2022-05-08 17:34:24,145] TC_11 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:34:30,711] TC_11 - Step 03: Click search button
+[INFO ] [2022-05-08 17:34:33,223] TC_11 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:34:33,658]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:34:33,775]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:34:33,997]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:34:34,123]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:34:34,162] TC_12 - Step 01: Click Edit link
+[INFO ] [2022-05-08 17:34:36,247] TC_12 - Step 02: Click Extend button
+[INFO ] [2022-05-08 17:34:38,284] TC_12 - Step 03: Enter text into textbox
+[INFO ] [2022-05-08 17:34:41,199] TC_12 - Step 04: Click Save button
+[INFO ] [2022-05-08 17:34:45,617] TC_12 - Step 05: Verify success message display
+[INFO ] [2022-05-08 17:34:46,038]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:34:46,041] TC_12 - Step 06: Enter text into search fields
+[INFO ] [2022-05-08 17:35:15,143] TC_12 - Step 07: Select Guest tag
+[INFO ] [2022-05-08 17:35:33,922] TC_12 - Step 08: Click search button
+[INFO ] [2022-05-08 17:35:36,928] TC_12 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-08 17:35:38,472]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:35:38,844]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:35:40,451]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:35:40,634]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:35:40,748] TC_13 - Step 01: Click Edit link
+[INFO ] [2022-05-08 17:35:45,301] TC_13 - Step 02: Click Extend button
+[INFO ] [2022-05-08 17:35:49,065] TC_13 - Step 03: Click 'Add new address' button
+[INFO ] [2022-05-08 17:35:54,560] TC_13 - Step 04: Enter info into textboxes
+[INFO ] [2022-05-08 17:36:03,519] TC_13 - Step 05: Click Save button
+[INFO ] [2022-05-08 17:36:09,479] TC_13 - Step 06: Verify success message displayed
+[INFO ] [2022-05-08 17:36:09,582]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:36:09,583] TC_13 - Step 07: Click Back to customer details link
+[INFO ] [2022-05-08 17:36:12,916] TC_13 - Step 08: Click extend button
+[INFO ] [2022-05-08 17:36:13,035] TC_13 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-08 17:36:28,201]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:36:28,373]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:36:28,494]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:36:28,657]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:36:28,803]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:36:28,924]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:36:28,951] TC_14 - Step 01: Open Customer page
+[INFO ] [2022-05-08 17:36:29,539] TC_14 - Step 02: Click Extend button
+[INFO ] [2022-05-08 17:37:00,327] TC_15 - Step 01: Open Customer page
+[INFO ] [2022-05-08 17:37:01,844] TC_15 - Step 02: Click search button
+[INFO ] [2022-05-08 17:37:07,030] TC_15 - Step 03: Select Guest tag
+[INFO ] [2022-05-08 17:37:09,718] TC_15 - Step 04: Click Search button
+[INFO ] [2022-05-08 17:37:11,878] TC_15 - Step 05: Click Edit button
+[INFO ] [2022-05-08 17:37:12,805] TC_15 - Step 06: Click Extend button
+[INFO ] [2022-05-08 17:37:13,633] TC_15 - Step 07: Click Delete button
+[INFO ] [2022-05-08 17:37:13,948] TC_15 - Step 08: Accept alert
+[INFO ] [2022-05-08 17:37:15,976] TC_15 - Step 09: Verify No data message in table
+[INFO ] [2022-05-08 17:37:16,038]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:21,506] ---------- START delete file in folder ----------
+[INFO ] [2022-05-08 17:39:21,508] ---------- END delete file in folder ----------
+[INFO ] [2022-05-08 17:39:21,630] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-08 17:39:27,795] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-08 17:39:34,631] Pre-condition - Step 03: Open Customer page
+[INFO ] [2022-05-08 17:39:37,657] TC_07 Step 01: Click 'Add new' button
+[INFO ] [2022-05-08 17:39:42,112] TC_07 - Step 02: Enter info in fields
+[INFO ] [2022-05-08 17:39:47,313] TC_07 - Step 03: Click Save and Continue button
+[INFO ] [2022-05-08 17:39:54,619] TC_07 - Step 04: Verify customer is added successfully
+[INFO ] [2022-05-08 17:39:54,686]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:54,746]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:54,797]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:54,845]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:54,907]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:54,958]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:55,021]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:55,094]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:55,163]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:55,230]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:39:55,230] TC_07 - Step 05: Click Go back to customer list
+[INFO ] [2022-05-08 17:40:03,185] TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page
+[INFO ] [2022-05-08 17:40:03,272]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:03,352]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:03,431]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:03,510]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:03,525] TC_08 - Step 01: Enter email address into search field
+[INFO ] [2022-05-08 17:40:03,837] TC_08 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:40:06,424] TC_08 - Step 03: Click search button
+[INFO ] [2022-05-08 17:40:08,549] TC_08 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:40:08,653]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:08,739]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:08,815]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:08,887]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:08,892] TC_09 - Step 01: Enter firstname into Firstname textbox
+[INFO ] [2022-05-08 17:40:09,170] TC_09 - Step 02: Enter Lastname into Lastname textbox
+[INFO ] [2022-05-08 17:40:09,350] TC_09 - Step 03: Select guests tag
+[INFO ] [2022-05-08 17:40:11,911] TC_09 - Step 04: Click search button
+[INFO ] [2022-05-08 17:40:14,016] TC_09 - Step 05: Verify customer info
+[INFO ] [2022-05-08 17:40:14,141]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:14,243]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:14,428]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:14,538]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:14,542] TC_10 - Step 01: Enter text into Company textbox
+[INFO ] [2022-05-08 17:40:14,881] TC_10 - Step 02: Select guests tag
+[INFO ] [2022-05-08 17:40:17,424] TC_10 - Step 03: Click search button
+[INFO ] [2022-05-08 17:40:19,541] TC_10 - Step 04: Verify customer info
+[INFO ] [2022-05-08 17:40:19,610]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:19,687]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:19,778]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:19,841]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-08 17:40:20,690] TC_11 - Step 01: Enter info into search fields
+[INFO ] [2022-05-08 17:40:24,279] TC_12 - Step 01: Click Edit link
+[INFO ] [2022-05-08 17:40:24,308] TC_13 - Step 01: Click Edit link
+[INFO ] [2022-05-08 17:40:24,333] TC_14 - Step 01: Open Customer page
+[INFO ] [2022-05-08 17:40:24,338] TC_15 - Step 01: Open Customer page
+[INFO ] [2022-05-09 23:25:49,709] ---------- START delete file in folder ----------
+[INFO ] [2022-05-09 23:25:49,716] ---------- END delete file in folder ----------
+[INFO ] [2022-05-09 23:25:49,843] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-09 23:26:20,853] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-09 23:26:26,658] Pre-condition - Step 03: Open Customer page
+[INFO ] [2022-05-09 23:26:29,501] TC_07 Step 01: Click 'Add new' button
+[INFO ] [2022-05-09 23:26:36,706] TC_07 - Step 02: Enter info in fields
+[INFO ] [2022-05-09 23:26:41,293] TC_07 - Step 03: Click Save and Continue button
+[INFO ] [2022-05-09 23:26:50,262] TC_07 - Step 04: Verify customer is added successfully
+[INFO ] [2022-05-09 23:26:50,330]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,387]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,437]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,487]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,537]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,583]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,639]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,715]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,768]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,821]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:50,821] TC_07 - Step 05: Click Go back to customer list
+[INFO ] [2022-05-09 23:26:59,238] TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page
+[INFO ] [2022-05-09 23:26:59,337]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:59,426]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:59,512]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:59,624]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:26:59,632] TC_08 - Step 01: Enter email address into search field
+[INFO ] [2022-05-09 23:26:59,944] TC_08 - Step 02: Select guests tag
+[INFO ] [2022-05-09 23:27:02,479] TC_08 - Step 03: Click search button
+[INFO ] [2022-05-09 23:27:04,567] TC_08 - Step 04: Verify customer info
+[INFO ] [2022-05-09 23:27:04,701]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:04,796]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:04,888]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:04,976]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:04,982] TC_09 - Step 01: Enter firstname into Firstname textbox
+[INFO ] [2022-05-09 23:27:05,239] TC_09 - Step 02: Enter Lastname into Lastname textbox
+[INFO ] [2022-05-09 23:27:05,455] TC_09 - Step 03: Select guests tag
+[INFO ] [2022-05-09 23:27:08,022] TC_09 - Step 04: Click search button
+[INFO ] [2022-05-09 23:27:10,183] TC_09 - Step 05: Verify customer info
+[INFO ] [2022-05-09 23:27:10,279]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:10,349]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:10,438]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:10,540]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:10,545] TC_10 - Step 01: Enter text into Company textbox
+[INFO ] [2022-05-09 23:27:10,777] TC_10 - Step 02: Select guests tag
+[INFO ] [2022-05-09 23:27:13,257] TC_10 - Step 03: Click search button
+[INFO ] [2022-05-09 23:27:15,383] TC_10 - Step 04: Verify customer info
+[INFO ] [2022-05-09 23:27:15,442]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:15,501]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:15,582]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:15,654]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:30,395] TC_11 - Step 01: Enter info into search fields
+[INFO ] [2022-05-09 23:27:35,584] TC_11 - Step 02: Select guests tag
+[INFO ] [2022-05-09 23:27:38,162] TC_11 - Step 03: Click search button
+[INFO ] [2022-05-09 23:27:40,315] TC_11 - Step 04: Verify customer info
+[INFO ] [2022-05-09 23:27:40,408]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:40,484]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:40,597]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:40,665]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:40,671] TC_12 - Step 01: Click Edit link
+[INFO ] [2022-05-09 23:27:42,550] TC_12 - Step 02: Click Extend button
+[INFO ] [2022-05-09 23:27:43,518] TC_12 - Step 03: Enter text into textbox
+[INFO ] [2022-05-09 23:27:45,062] TC_12 - Step 04: Click Save button
+[INFO ] [2022-05-09 23:27:49,181] TC_12 - Step 05: Verify success message display
+[INFO ] [2022-05-09 23:27:49,256]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:49,256] TC_12 - Step 06: Enter text into search fields
+[INFO ] [2022-05-09 23:27:54,338] TC_12 - Step 07: Select Guest tag
+[INFO ] [2022-05-09 23:27:56,967] TC_12 - Step 08: Click search button
+[INFO ] [2022-05-09 23:27:59,136] TC_12 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-09 23:27:59,211]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:59,296]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:59,418]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:59,529]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:27:59,533] TC_13 - Step 01: Click Edit link
+[INFO ] [2022-05-09 23:28:01,224] TC_13 - Step 02: Click Extend button
+[INFO ] [2022-05-09 23:28:01,641] TC_13 - Step 03: Click 'Add new address' button
+[INFO ] [2022-05-09 23:28:11,822] TC_13 - Step 04: Enter info into textboxes
+[INFO ] [2022-05-09 23:28:16,183] TC_13 - Step 05: Click Save button
+[INFO ] [2022-05-09 23:28:36,075] TC_13 - Step 06: Verify success message displayed
+[INFO ] [2022-05-09 23:28:36,146]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:28:36,146] TC_13 - Step 07: Click Back to customer details link
+[INFO ] [2022-05-09 23:28:39,245] TC_13 - Step 08: Click extend button
+[INFO ] [2022-05-09 23:28:39,304] TC_13 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-09 23:28:54,400]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:28:54,485]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:28:54,556]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:28:54,664]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:28:54,749]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:28:54,826]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:28:54,836] TC_14 - Step 01: Open Customer page
+[INFO ] [2022-05-09 23:28:56,203] TC_14 - Step 02: Click Extend button
+[INFO ] [2022-05-09 23:28:56,623] TC_14 - Step 03: Enter info into textboxes
+[INFO ] [2022-05-09 23:29:03,728] TC_14 - Step 04: Select Guest tag
+[INFO ] [2022-05-09 23:29:06,324] TC_14 - Step 05: Click search button
+[INFO ] [2022-05-09 23:29:08,473] TC_14 - Step 06: Click Edit button
+[INFO ] [2022-05-09 23:29:39,147] TC_15 - Step 01: Open Customer page
+[INFO ] [2022-05-09 23:33:50,822] ---------- START delete file in folder ----------
+[INFO ] [2022-05-09 23:33:50,831] ---------- END delete file in folder ----------
+[INFO ] [2022-05-09 23:33:51,022] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-09 23:33:58,553] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-09 23:34:07,215] Pre-condition - Step 03: Open Customer page
+[INFO ] [2022-05-09 23:34:14,457] TC_07 Step 01: Click 'Add new' button
+[INFO ] [2022-05-09 23:34:21,862] TC_07 - Step 02: Enter info in fields
+[INFO ] [2022-05-09 23:34:30,456] TC_07 - Step 03: Click Save and Continue button
+[INFO ] [2022-05-09 23:34:40,227] TC_07 - Step 04: Verify customer is added successfully
+[INFO ] [2022-05-09 23:34:40,977]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:41,308]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:41,468]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:41,578]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:41,736]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:41,916]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:42,113]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:42,373]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:42,469]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:42,607]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:42,608] TC_07 - Step 05: Click Go back to customer list
+[INFO ] [2022-05-09 23:34:54,079] TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page
+[INFO ] [2022-05-09 23:34:54,462]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:54,667]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:54,863]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:55,037]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:34:55,061] TC_08 - Step 01: Enter email address into search field
+[INFO ] [2022-05-09 23:34:55,629] TC_08 - Step 02: Select guests tag
+[INFO ] [2022-05-09 23:34:58,565] TC_08 - Step 03: Click search button
+[INFO ] [2022-05-09 23:35:00,766] TC_08 - Step 04: Verify customer info
+[INFO ] [2022-05-09 23:35:00,889]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:01,130]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:01,449]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:01,669]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:01,774] TC_09 - Step 01: Enter firstname into Firstname textbox
+[INFO ] [2022-05-09 23:35:02,332] TC_09 - Step 02: Enter Lastname into Lastname textbox
+[INFO ] [2022-05-09 23:35:02,771] TC_09 - Step 03: Select guests tag
+[INFO ] [2022-05-09 23:35:05,681] TC_09 - Step 04: Click search button
+[INFO ] [2022-05-09 23:35:07,917] TC_09 - Step 05: Verify customer info
+[INFO ] [2022-05-09 23:35:08,088]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:08,267]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:08,460]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:08,608]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:08,635] TC_10 - Step 01: Enter text into Company textbox
+[INFO ] [2022-05-09 23:35:09,071] TC_10 - Step 02: Select guests tag
+[INFO ] [2022-05-09 23:35:11,954] TC_10 - Step 03: Click search button
+[INFO ] [2022-05-09 23:35:14,325] TC_10 - Step 04: Verify customer info
+[INFO ] [2022-05-09 23:35:14,849]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:15,008]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:15,205]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:15,500]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:19,388] TC_11 - Step 01: Enter info into search fields
+[INFO ] [2022-05-09 23:35:27,363] TC_11 - Step 02: Select guests tag
+[INFO ] [2022-05-09 23:35:30,281] TC_11 - Step 03: Click search button
+[INFO ] [2022-05-09 23:35:32,542] TC_11 - Step 04: Verify customer info
+[INFO ] [2022-05-09 23:35:32,770]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:32,996]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:33,188]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:33,399]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:33,425] TC_12 - Step 01: Click Edit link
+[INFO ] [2022-05-09 23:35:37,452] TC_12 - Step 02: Click Extend button
+[INFO ] [2022-05-09 23:35:41,064] TC_12 - Step 03: Enter text into textbox
+[INFO ] [2022-05-09 23:35:46,051] TC_12 - Step 04: Click Save button
+[INFO ] [2022-05-09 23:35:51,322] TC_12 - Step 05: Verify success message display
+[INFO ] [2022-05-09 23:35:51,675]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:35:51,679] TC_12 - Step 06: Enter text into search fields
+[INFO ] [2022-05-09 23:35:57,949] TC_12 - Step 07: Select Guest tag
+[INFO ] [2022-05-09 23:36:00,837] TC_12 - Step 08: Click search button
+[INFO ] [2022-05-09 23:36:03,086] TC_12 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-09 23:36:03,174]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:03,288]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:03,393]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:03,472]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:03,491] TC_13 - Step 01: Click Edit link
+[INFO ] [2022-05-09 23:36:04,752] TC_13 - Step 02: Click Extend button
+[INFO ] [2022-05-09 23:36:05,733] TC_13 - Step 03: Click 'Add new address' button
+[INFO ] [2022-05-09 23:36:11,462] TC_13 - Step 04: Enter info into textboxes
+[INFO ] [2022-05-09 23:36:17,345] TC_13 - Step 05: Click Save button
+[INFO ] [2022-05-09 23:36:23,139] TC_13 - Step 06: Verify success message displayed
+[INFO ] [2022-05-09 23:36:23,221]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:23,221] TC_13 - Step 07: Click Back to customer details link
+[INFO ] [2022-05-09 23:36:26,738] TC_13 - Step 08: Click extend button
+[INFO ] [2022-05-09 23:36:26,792] TC_13 - Step 09: Verify info displayed correctly
+[INFO ] [2022-05-09 23:36:41,912]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:42,000]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:42,091]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:42,178]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:42,282]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:42,377]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:36:42,390] TC_14 - Step 01: Open Customer page
+[INFO ] [2022-05-09 23:36:44,067] TC_14 - Step 02: Click Extend button
+[INFO ] [2022-05-09 23:36:44,217] TC_14 - Step 03: Enter info into textboxes
+[INFO ] [2022-05-09 23:36:51,698] TC_14 - Step 04: Select Guest tag
+[INFO ] [2022-05-09 23:36:54,366] TC_14 - Step 05: Click search button
+[INFO ] [2022-05-09 23:36:56,494] TC_14 - Step 06: Click Edit button
+[INFO ] [2022-05-09 23:36:57,695] TC_14 - Step 07: Click Extend button
+[INFO ] [2022-05-09 23:36:58,989] TC_14 - Step 08: Click Edit button
+[INFO ] [2022-05-09 23:37:00,854] TC_14 - Step 09: Enter text into textboxes
+[INFO ] [2022-05-09 23:37:08,173] TC_14 - Step 10: Click Save button
+[INFO ] [2022-05-09 23:37:11,694] TC_14 - Step 11: Verify success message displayed
+[INFO ] [2022-05-09 23:37:11,788]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:37:11,788] TC_14 - Step 12: Click Go back to customer details link
+[INFO ] [2022-05-09 23:37:15,151] TC_14 - Step 13: Click Extend button
+[INFO ] [2022-05-09 23:37:15,232] TC_14 - Step 14: Verify info displayed correctly
+[INFO ] [2022-05-09 23:37:30,330]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:37:30,419]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:37:30,563]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:37:30,659]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:37:30,742]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:37:30,881]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:37:30,886] TC_15 - Step 01: Open Customer page
+[INFO ] [2022-05-09 23:37:32,310] TC_15 - Step 02: Click search button
+[INFO ] [2022-05-09 23:37:38,626] TC_15 - Step 03: Select Guest tag
+[INFO ] [2022-05-09 23:37:41,651] TC_15 - Step 04: Click Search button
+[INFO ] [2022-05-09 23:37:43,776] TC_15 - Step 05: Click Edit button
+[INFO ] [2022-05-09 23:37:45,178] TC_15 - Step 06: Click Extend button
+[INFO ] [2022-05-09 23:37:48,066] TC_15 - Step 07: Click Delete button
+[INFO ] [2022-05-09 23:37:48,549] TC_15 - Step 08: Accept alert
+[INFO ] [2022-05-09 23:37:50,646] TC_15 - Step 09: Verify No data message in table
+[INFO ] [2022-05-09 23:37:50,738]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-09 23:38:22,012] ---------- START delete file in folder ----------
+[INFO ] [2022-05-09 23:38:22,017] ---------- END delete file in folder ----------
+[INFO ] [2022-05-09 23:38:22,281] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-09 23:38:33,794] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-09 23:43:04,330] ---------- START delete file in folder ----------
+[INFO ] [2022-05-09 23:43:04,332] ---------- END delete file in folder ----------
+[INFO ] [2022-05-09 23:43:04,478] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-09 23:43:15,380] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-09 23:43:23,907] Pre-condition - Step 03: Open Products page
+[INFO ] [2022-05-09 23:43:28,319] Search 01 - Verify search info
+[INFO ] [2022-05-09 23:46:22,244] Search 01 - Verify product detail page displays
+[INFO ] [2022-05-09 23:46:24,665]  -------------------------- FAILED -------------------------- 
+[INFO ] [2022-05-09 23:46:24,805]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:24:13,573] ---------- START delete file in folder ----------
+[INFO ] [2022-05-10 00:24:13,578] ---------- END delete file in folder ----------
+[INFO ] [2022-05-10 00:24:13,725] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-10 00:24:44,775] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-10 00:24:55,007] Pre-condition - Step 03: Open Products page
+[INFO ] [2022-05-10 00:25:00,640] Search 01 - Verify search info
+[INFO ] [2022-05-10 00:25:00,925]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:01,103]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:01,367]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:01,535]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:01,722]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:07,026] Search 01 - Verify no data message
+[INFO ] [2022-05-10 00:25:43,052] Search 01 - Verify search info
+[INFO ] [2022-05-10 00:25:43,153]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:43,255]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:43,350]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:43,453]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:48,212] Search 01 - Verify search info
+[INFO ] [2022-05-10 00:25:48,342]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:48,472]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:48,586]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:48,693]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:25:55,586] Search 01 - Verify no data message
+[INFO ] [2022-05-10 00:26:30,981] Search 01 - Verify product detail page displays
+[INFO ] [2022-05-10 00:26:31,870]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:26:32,031]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:33:48,077] ---------- START delete file in folder ----------
+[INFO ] [2022-05-10 00:33:48,096] ---------- END delete file in folder ----------
+[INFO ] [2022-05-10 00:33:48,222] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-10 00:33:58,754] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-10 00:34:05,642] Pre-condition - Step 03: Open Products page
+[INFO ] [2022-05-10 00:34:35,830] ---------- START delete file in folder ----------
+[INFO ] [2022-05-10 00:34:35,832] ---------- END delete file in folder ----------
+[INFO ] [2022-05-10 00:34:35,962] Pre-condition - Step 01: Open browser 'chrome' and navigate to 'https://admin-demo.nopcommerce.com/login?ReturnUrl=%2FAdmin%2FProduct%2FList' 
+[INFO ] [2022-05-10 00:34:44,381] Pre-condition - Step 02: Login with Admin account
+[INFO ] [2022-05-10 00:34:49,886] Pre-condition - Step 03: Open Products page
+[INFO ] [2022-05-10 00:34:54,305] Search 01 - Verify search info
+[INFO ] [2022-05-10 00:34:54,397]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:34:54,476]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:34:54,559]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:34:54,667]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:34:54,795]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:34:59,462] Search 01 - Verify no data message
+[INFO ] [2022-05-10 00:34:59,532]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:04,212] Search 01 - Verify search info
+[INFO ] [2022-05-10 00:35:04,288]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:04,435]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:04,535]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:04,679]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:09,357] Search 01 - Verify search info
+[INFO ] [2022-05-10 00:35:09,424]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:09,496]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:09,580]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:09,646]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:16,344] Search 01 - Verify no data message
+[INFO ] [2022-05-10 00:35:16,399]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:21,946] Search 01 - Verify product detail page displays
+[INFO ] [2022-05-10 00:35:22,347]  -------------------------- PASSED -------------------------- 
+[INFO ] [2022-05-10 00:35:22,421]  -------------------------- PASSED -------------------------- 

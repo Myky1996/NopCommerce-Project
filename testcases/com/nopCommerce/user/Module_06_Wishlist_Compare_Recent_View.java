@@ -2,13 +2,18 @@ package com.nopCommerce.user;
 
 import java.util.Random;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.nopCommerce.common.Common_01_Register_to_system;
+
 import commons.BaseTest;
 import commons.PageGeneratorManager;
+import enviromentConfig.Enviroment;
 import pageObjects.nopCommerce.user.AddToCartPO;
 import pageObjects.nopCommerce.user.CompareProductPO;
 import pageObjects.nopCommerce.user.HomePageObject;
@@ -20,6 +25,7 @@ import pageObjects.nopCommerce.user.TopMenuSubPagePO;
 import pageObjects.nopCommerce.user.WishlistPO;
 
 public class Module_06_Wishlist_Compare_Recent_View extends BaseTest {
+	Enviroment enviroment;
 	WebDriver driver;
 	HomePageObject homePage;
 	LoginPO loginPage;
@@ -31,38 +37,37 @@ public class Module_06_Wishlist_Compare_Recent_View extends BaseTest {
 	Product_CatergoryListPO Product_CatergoryListPage;
 	CompareProductPO CompareProductPage;
 
-	String password, existingEmail, newPassword, userName, SKU, productTitle, productPrice;
+	String password, emailAddress, userName, SKU, productTitle, productPrice;
 
-	@Parameters({ "browser", "url" })
+	@Parameters({ "envName", "severName", "browser", "ipAddress", "portNumber", "osName" })
 	@BeforeClass
-	public void BeforeClass(String browserName, String appUrl) {
-
-		existingEmail = "kinu@yopmail.com";
-		password = "kinu@yopmail.com";
-		newPassword = "buinhuhoa";
-		userName = "my ky";
+	public void BeforeClass(@Optional("local") String envName, @Optional("testing") String severName,
+			@Optional("chrome") String browserName, @Optional("localhost") String ipAddress,
+			@Optional("4444") String portNumber, @Optional("Windows 10") String osName) {
+		ConfigFactory.setProperty("env", severName);
+		enviroment = ConfigFactory.create(Enviroment.class);
+		
+		emailAddress = Common_01_Register_to_system.emailAddress;
+		password = Common_01_Register_to_system.password;
+		userName = Common_01_Register_to_system.firstName + Common_01_Register_to_system.lastName;
 		SKU = "DS_VA3_PC";
 		productTitle = "Digital Storm VANQUISH 3 Custom Performance PC";
 		productPrice = "$1,259.00";
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "' ");
 
-		driver = getBrowserDriver(browserName, appUrl);
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + enviroment.userAppUrl() + "' ");
+		driver = getBrowserDriver(envName, enviroment.userAppUrl(), browserName, ipAddress, portNumber, osName);
 		homePage = PageGeneratorManager.getHompageObject(driver);
 
 		log.info("Pre-condition - Step 02: Open 'Login' page");
 		homePage.openHeaderFooterPageByText(driver, "Log in");
 		loginPage = PageGeneratorManager.getLoginPageObject(driver);
 
-		log.info("Register - Step 01: Fill in email textbox");
-		loginPage.enterTextToTextboxByName(driver, "Email", existingEmail);
+		log.info("Pre-condition - Step 03: Set cookies and reload page");
+		loginPage.setCookies(driver, Common_01_Register_to_system.loginPageCookie);
 
-		log.info("Register - Step 02: Fill in password textbox");
-		loginPage.enterTextToTextboxByName(driver, "Password", password);
-
-		log.info("Register - Step 03: Click 'Login' button");
-		loginPage.clickToButtonByText(driver, "Log in");
-
+		loginPage.refreshCurrentPage(driver);
 		homePage = PageGeneratorManager.getHompageObject(driver);
+		loginPage.closeNotiBarByText(driver);
 
 	}
 
@@ -81,7 +86,7 @@ public class Module_06_Wishlist_Compare_Recent_View extends BaseTest {
 		productDetailPage.clickToButtonByText(driver, "Add to wishlist");
 
 		log.info("Wishlist 01 - Step 03: close noti bar");
-		productDetailPage.closeSuccesNotiBarByText(driver);
+		productDetailPage.closeNotiBarByText(driver);
 
 		log.info("Wishlist 01 - Step 04: open Wishlist page");
 		productDetailPage.openHeaderFooterPageByText(driver, "Wishlist");
@@ -89,10 +94,8 @@ public class Module_06_Wishlist_Compare_Recent_View extends BaseTest {
 
 		log.info("Wishlist 01 - Step 05: verify product is added succesfully");
 		verifyEquals(wishlistPage.getValueInTableAtColumnTableAndRowIndex(driver, "SKU", "1"), SKU);
-		verifyEquals(wishlistPage.getValueInTableAtColumnTableAndRowIndex(driver, "Product(s)", "1"),
-				productTitle);
-		verifyEquals(wishlistPage.getValueInTableAtColumnTableAndRowIndex(driver, "Price", "1"),
-				productPrice);
+		verifyEquals(wishlistPage.getValueInTableAtColumnTableAndRowIndex(driver, "Product(s)", "1"), productTitle);
+		verifyEquals(wishlistPage.getValueInTableAtColumnTableAndRowIndex(driver, "Price", "1"), productPrice);
 
 		log.info("Wishlist 01 - Step 06: click to share link");
 		wishlistPage.clickToLinkShare(driver);
@@ -116,10 +119,8 @@ public class Module_06_Wishlist_Compare_Recent_View extends BaseTest {
 
 		log.info("Add to cart 01 - Step 05: verify product is added to Shopping cart");
 		verifyEquals(addToCartPage.getValueInTableAtColumnTableAndRowIndex(driver, "SKU", "1"), SKU);
-		verifyEquals(addToCartPage.getValueInTableAtColumnTableAndRowIndex(driver, "Product(s)", "1"),
-				productTitle);
-		verifyEquals(addToCartPage.getValueInTableAtColumnTableAndRowIndex(driver, "Price", "1"),
-				productPrice);
+		verifyEquals(addToCartPage.getValueInTableAtColumnTableAndRowIndex(driver, "Product(s)", "1"), productTitle);
+		verifyEquals(addToCartPage.getValueInTableAtColumnTableAndRowIndex(driver, "Price", "1"), productPrice);
 		log.info("Add to cart 01 - Step 06: open wishlist page");
 		wishlistPage.openHeaderFooterPageByText(driver, "Wishlist");
 
@@ -143,7 +144,7 @@ public class Module_06_Wishlist_Compare_Recent_View extends BaseTest {
 		productDetailPage.clickToButtonByText(driver, "Add to wishlist");
 
 		log.info("Wishlist 01 - Step 03: close noti bar");
-		productDetailPage.closeSuccesNotiBarByText(driver);
+		productDetailPage.closeNotiBarByText(driver);
 
 		log.info("Wishlist 01 - Step 04: open Wishlist page");
 		productDetailPage.openHeaderFooterPageByText(driver, "Wishlist");
@@ -171,13 +172,11 @@ public class Module_06_Wishlist_Compare_Recent_View extends BaseTest {
 				"Digital Storm VANQUISH 3 Custom Performance PC", "Add to compare list");
 		verifyTrue(Product_CatergoryListPage.isjQueryAJAXLoadSucess(driver));
 		log.info("Compare - Step 03: verify success message");
-		verifyEquals(
-				Product_CatergoryListPage.getSuccessMsgOnNotiBarByClass(driver,
-						"bar-notification success"),
+		verifyEquals(Product_CatergoryListPage.getSuccessMsgOnNotiBarByClass(driver, "bar-notification success"),
 				"The product has been added to your product comparison");
 
 		log.info("Compare - Step 03: close noti bar");
-		Product_CatergoryListPage.closeSuccesNotiBarByText(driver);
+		Product_CatergoryListPage.closeNotiBarByText(driver);
 
 		log.info("Compare - Step 02: click to Add to compare product 2");
 		Product_CatergoryListPage.clickToButtonAtProductListByProductTitleAndButtonName(driver,
@@ -185,13 +184,11 @@ public class Module_06_Wishlist_Compare_Recent_View extends BaseTest {
 		verifyTrue(Product_CatergoryListPage.isjQueryAJAXLoadSucess(driver));
 
 		log.info("Compare - Step 03: verify success message");
-		verifyEquals(
-				Product_CatergoryListPage.getSuccessMsgOnNotiBarByClass(driver,
-						"bar-notification success"),
+		verifyEquals(Product_CatergoryListPage.getSuccessMsgOnNotiBarByClass(driver, "bar-notification success"),
 				"The product has been added to your product comparison");
 
 		log.info("Compare - Step 03: close noti bar");
-		Product_CatergoryListPage.closeSuccesNotiBarByText(driver);
+		Product_CatergoryListPage.closeNotiBarByText(driver);
 
 		log.info("Compare - Step 03: open Compare product list page");
 		Product_CatergoryListPage.openHeaderFooterPageByText(driver, "Compare products list");

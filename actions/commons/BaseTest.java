@@ -3,22 +3,19 @@ package commons;
 import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeTest;
+import factoryEnviroment.GridFactory;
+import factoryEnviroment.LocalFactory;
+import factoryEnviroment.SaucelabFactory;
 
 public class BaseTest {
-	private String projectPath = System.getProperty("user.dir");
 	private WebDriver driver;
 	protected final Log log;
 
@@ -26,31 +23,25 @@ public class BaseTest {
 		log = LogFactory.getLog(getClass());
 	}
 
-	protected WebDriver getBrowserDriver(String browserName, String appUrl) {
-		if (browserName.equals("firefox")) {
-			System.setProperty("webdriver.gecko.driver",
-					projectPath + File.separator + "browserDrivers" + File.separator + "geckodriver");
-			driver = new FirefoxDriver();
-		} else if (browserName.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", projectPath + "/browserDrivers/chromedriver");
-
-//			File file = new File(projectPath + File.separator + "browserExtensions" + File.separator + "extension_1_6_6_0 (1).crx");
-//			ChromeOptions options = new ChromeOptions();
-			// options.addExtensions(file);
-//			options.addArguments("--lang=vi");
-//			options.addArguments("--disable-inforbars");
-//			options.addArguments("--disable-notifications");
-//			options.addArguments("--disable-geolocation");
-
-			driver = new ChromeDriver();
-		} else if (browserName.equals("safari")) {
-			driver = new SafariDriver();
-		} else {
-			throw new RuntimeException("Browser name is invalid");
+	protected WebDriver getBrowserDriver(String envName, String severName, String browserName, String ipAddress,
+			String portNumber, String osName) {
+		switch (envName) {
+		case "local":
+			driver = new LocalFactory(browserName).createDriver();
+			break;
+		case "grid":
+			driver = new GridFactory(browserName, ipAddress, portNumber).createDriver();
+			break;
+		case "saucelab":
+			driver = new SaucelabFactory(browserName, osName).createDriver();
+			break;
+		default:
+			driver = new LocalFactory(browserName).createDriver();
+			break;
 		}
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		driver.get(appUrl);
+		driver.get(severName);
 		return driver;
 	}
 
@@ -89,7 +80,6 @@ public class BaseTest {
 		}
 		return pass;
 	}
-
 
 	private boolean checkEquals(Object actual, Object expected) {
 		boolean pass = true;

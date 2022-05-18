@@ -2,18 +2,23 @@ package com.nopCommerce.user;
 
 import java.util.Random;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
 import commons.PageGeneratorManager;
+import enviromentConfig.Enviroment;
 import pageObjects.nopCommerce.user.HomePageObject;
 import pageObjects.nopCommerce.user.LoginPO;
 import pageObjects.nopCommerce.user.registerPO;
 
 public class Module_01_Register extends BaseTest {
+	Enviroment enviroment;
 	WebDriver driver;
 	HomePageObject homePage;
 	registerPO registerPage;
@@ -21,9 +26,13 @@ public class Module_01_Register extends BaseTest {
 
 	String firstName, lastName, email, password, confirmPassword, invalidpassword;
 
-	@Parameters({ "browser", "url" })
+	@Parameters({ "envName", "severName", "browser", "ipAddress", "portNumber", "osName" })
 	@BeforeClass
-	public void BeforeClass(String browserName, String appUrl) {
+	public void BeforeClass(@Optional("local") String envName, @Optional("testing") String severName,
+			@Optional("chrome") String browserName, @Optional("localhost") String ipAddress,
+			@Optional("4444") String portNumber, @Optional("Windows 10") String osName) {
+		ConfigFactory.setProperty("env", severName);
+		enviroment = ConfigFactory.create(Enviroment.class);
 
 		firstName = "Ky";
 		lastName = "My";
@@ -31,9 +40,10 @@ public class Module_01_Register extends BaseTest {
 		password = "12345678";
 		invalidpassword = "123";
 
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "' ");
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + enviroment.userAppUrl()
+				+ "' ");
 
-		driver = getBrowserDriver(browserName, appUrl);
+		driver = getBrowserDriver(envName, enviroment.userAppUrl(), browserName, ipAddress, portNumber, osName);
 		homePage = PageGeneratorManager.getHompageObject(driver);
 
 		log.info("Pre-condition - Step 02: Open 'Register' page");
@@ -146,10 +156,10 @@ public class Module_01_Register extends BaseTest {
 
 		log.info("Register - Step 07: Click 'Register' button");
 		registerPage.clickToButtonByText(driver, "Register");
-		
+
 		log.info("Register - Step 08: Verify invalid password message");
 		verifyEquals(registerPage.getInvalidPasswordMessage(driver),
-				"Password must meet the following rules: \nmust have at least 6 characters");
+				"Password must meet the following rules:\nmust have at least 6 characters");
 
 	}
 
@@ -176,14 +186,19 @@ public class Module_01_Register extends BaseTest {
 		registerPage.enterTextToTextboxByName(driver, "ConfirmPassword", "1234567");
 
 		log.info("Register - Step 07: Click 'Register' button");
-		registerPage.clickToButtonByText(driver,"Register");
+		registerPage.clickToButtonByText(driver, "Register");
 
 		log.info("Register - Step 08: Verify incorrect password message");
 		verifyEquals(registerPage.getIncorrectConfirmPasswordMessage(driver),
 				"The password and confirmation password do not match.");
-		System.out.print(registerPage.getIncorrectConfirmPasswordMessage(driver));
+		
 
 	}
+	@AfterClass
+	public void afterClass() {
+		driver.quit();
+	}
+
 
 	private int getRandomNumber() {
 		Random rand = new Random();

@@ -1,16 +1,20 @@
 package com.nopCommerce.user;
 
-import static org.testng.Assert.assertEquals;
-
 import java.util.Random;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.nopCommerce.common.Common_01_Register_to_system;
+
 import commons.BaseTest;
 import commons.PageGeneratorManager;
+import enviromentConfig.Enviroment;
 import pageObjects.nopCommerce.user.AddToCartPO;
 import pageObjects.nopCommerce.user.CheckoutPO;
 import pageObjects.nopCommerce.user.HomePageObject;
@@ -23,6 +27,7 @@ import pageObjects.nopCommerce.user.TopMenuSubPagePO;
 import pageObjects.nopCommerce.user.WishlistPO;
 
 public class Module_07_Order extends BaseTest {
+	Enviroment enviroment;
 	WebDriver driver;
 	HomePageObject homePage;
 	LoginPO loginPage;
@@ -35,19 +40,17 @@ public class Module_07_Order extends BaseTest {
 	CheckoutPO checkoutPage;
 	OrderHistoryPO OrderHistoryPage;
 
-	String password, emailAddress, firstName, lastName, userName, country1, zipcode, phoneNumber, fullName, address1,
-			city, country2, state2;
+	String password, emailAddress, country1, zipcode, phoneNumber, address1, city, country2, state2, firstName,
+			lastName, userName;
 	String SKU, productName, price, Quantity, Total, cardNumber;
 
-	@Parameters({ "browser", "url" })
+	@Parameters({ "envName", "severName", "browser", "ipAddress", "portNumber", "osName" })
 	@BeforeClass
-	public void BeforeClass(String browserName, String appUrl) {
-
-		emailAddress = "kinu@yopmail.com";
-		password = "kinu@yopmail.com";
-		userName = "ky bui";
-		firstName = "ky";
-		lastName = "bui";
+	public void BeforeClass(@Optional("local") String envName, @Optional("testing") String severName,
+			@Optional("chrome") String browserName, @Optional("localhost") String ipAddress,
+			@Optional("4444") String portNumber, @Optional("Windows 10") String osName) {
+		ConfigFactory.setProperty("env", severName);
+		enviroment = ConfigFactory.create(Enviroment.class);
 
 		country1 = "Viet Nam";
 		zipcode = "55000";
@@ -63,25 +66,29 @@ public class Module_07_Order extends BaseTest {
 		Quantity = "2";
 		Total = "$3,600.00";
 
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "' ");
+		enviroment = ConfigFactory.create(Enviroment.class);
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + enviroment.userAppUrl()
+				+ "' ");
 
-		driver = getBrowserDriver(browserName, appUrl);
+		emailAddress = Common_01_Register_to_system.emailAddress;
+		password = Common_01_Register_to_system.password;
+		firstName = Common_01_Register_to_system.firstName;
+		lastName = Common_01_Register_to_system.lastName;
+		userName = Common_01_Register_to_system.firstName + Common_01_Register_to_system.lastName;
+
+		driver = getBrowserDriver(envName, enviroment.userAppUrl(), browserName, ipAddress, portNumber, osName);
 		homePage = PageGeneratorManager.getHompageObject(driver);
 
 		log.info("Pre-condition - Step 02: Open 'Login' page");
 		homePage.openHeaderFooterPageByText(driver, "Log in");
 		loginPage = PageGeneratorManager.getLoginPageObject(driver);
 
-		log.info("Pre-condition - Step 01: Fill in email textbox");
-		loginPage.enterTextToTextboxByName(driver, "Email", emailAddress);
+		log.info("Pre-condition - Step 03: Set cookies and reload page");
+		loginPage.setCookies(driver, Common_01_Register_to_system.loginPageCookie);
 
-		log.info("Pre-condition - Step 02: Fill in password textbox");
-		loginPage.enterTextToTextboxByName(driver, "Password", password);
-
-		log.info("Pre-condition - Step 03: Click 'Login' button");
-		loginPage.clickToButtonByText(driver, "Log in");
-
+		loginPage.refreshCurrentPage(driver);
 		homePage = PageGeneratorManager.getHompageObject(driver);
+		loginPage.closeNotiBarByText(driver);
 
 		log.info("Pre-condition - Step 04: Go to product sub category page");
 		homePage.openTopMenuSubPageByText(driver, "Computers", "Desktops");
@@ -117,12 +124,10 @@ public class Module_07_Order extends BaseTest {
 		productDetailPage.clickToButtonByText(driver, "Add to cart");
 
 		log.info("Add to cart - Step 0: verify 'Add to cart' success message");
-		productDetailPage.sleepInSecond(2);
 		verifyEquals(productDetailPage.getSuccessMsgOnNotiBarByClass(driver, "bar-notification success"),
 				"The product has been added to your shopping cart");
-		productDetailPage.sleepInSecond(2);
 
-		productDetailPage.closeSuccesNotiBarByText(driver);
+		productDetailPage.closeNotiBarByText(driver);
 
 		log.info("Add to cart - Step 0: verify product info at shopping cart page");
 		productDetailPage.hoverShoppingCartTooltip(driver);
@@ -135,10 +140,10 @@ public class Module_07_Order extends BaseTest {
 						+ "\nSoftware: Acrobat Reader [+$10.00]\nSoftware: Total Commander [+$5.00]");
 		verifyEquals(productDetailPage.getUnitPriceInTooltip(driver), "$1,500.00");
 		verifyEquals(productDetailPage.getQuantityPerItem(driver), "1");
-		verifyEquals(productDetailPage.getSubTotalPrice(driver), "$1,500.00");
+		verifyEquals(productDetailPage.getSubTotalPrice(driver), "Sub-Total: $1,500.00");
 	}
 
-	// @Test
+	@Test
 	public void TC_02_Edit_Product_In_Shopping_Cart() {
 		productDetailPage.openHeaderFooterPageByText(driver, "Shopping cart");
 		productDetailPage.clickToLinkAtTableByRowIndex(driver, "Product(s)", "1");
@@ -169,10 +174,9 @@ public class Module_07_Order extends BaseTest {
 		productDetailPage.clickToButtonByText(driver, "Update");
 
 		log.info("Add to cart - Step 0: verify 'Add to cart' success message");
-		verifyEquals(
-				productDetailPage.getSuccessMsgOnNotiBarByClass(driver, "bar-notification success"),
+		verifyEquals(productDetailPage.getSuccessMsgOnNotiBarByClass(driver, "bar-notification success"),
 				"The product has been added to your shopping cart");
-		productDetailPage.closeSuccesNotiBarByText(driver);
+		productDetailPage.closeNotiBarByText(driver);
 
 		log.info("Add to cart - Step 0: verify updated info at shopping cart page");
 		productDetailPage.hoverShoppingCartTooltip(driver);
@@ -184,10 +188,10 @@ public class Module_07_Order extends BaseTest {
 				"Processor: 2.2 GHz Intel Pentium Dual-Core E2200\nRAM: 4GB [+$20.00]\nHDD: 320 GB\nOS: Vista Home [+$50.00]\nSoftware: Microsoft Office [+$50.00]");
 		verifyEquals(productDetailPage.getUnitPriceInTooltip(driver), "$1,320.00");
 		verifyEquals(productDetailPage.getQuantityPerItem(driver), "2");
-		verifyEquals(productDetailPage.getSubTotalPrice(driver), "$2,640.00");
+		verifyEquals(productDetailPage.getSubTotalPrice(driver), "Sub-Total: $2,640.00");
 	}
 
-	// @Test
+	@Test
 	public void TC_03_Remove_Product_From_Cart() {
 		productDetailPage.openHeaderFooterPageByText(driver, "Shopping cart");
 		productDetailPage.clickToButtonxAtTableByRowIndex(driver, "Remove", "1");
@@ -212,7 +216,7 @@ public class Module_07_Order extends BaseTest {
 		productDetailPage.clickToButtonxAtTableByRowIndex(driver, "Remove", "1");
 	}
 
-//	@Test
+	@Test
 	public void TC_05_Check_out() {
 		log.info("Pre-condition - Step 04: Go to product sub category page");
 		productDetailPage.openTopMenuSubPageByText(driver, "Computers", "Notebooks");
@@ -286,25 +290,21 @@ public class Module_07_Order extends BaseTest {
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-payment_info", "Continue");
 
 		log.info("Pre-condition - Step 05: Verify Billing address info");
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "name"), firstName + lastName);
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "email"),
-				"Email: '" + emailAddress + "'");
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "phone"),
-				"Phone: '" + phoneNumber + "'");
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "name"), firstName + " " + lastName);
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "phone"), "Phone: " + phoneNumber);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "address1"), address1);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "city-state-zip"),
-				"'" + city + "','" + zipcode + "'");
+				city + "," + zipcode);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "country"), country1);
 
 		log.info("Pre-condition - Step 05: Verify Shipping address info");
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "name"), userName);
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "email"),
-				"Email: '" + emailAddress + "'");
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "phone"),
-				"Phone: '" + phoneNumber + "'");
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "phone"), "Phone: " + phoneNumber);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "address1"), address1);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "city-state-zip"),
-				"'" + city + "','" + state2 + "','" + zipcode + "'");
+				city + "," + state2 + "," + zipcode);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "country"), country2);
 
 		log.info("Pre-condition - Step 05: Verify Payment method");
@@ -338,11 +338,11 @@ public class Module_07_Order extends BaseTest {
 		myAccountPage.openSidePageByText(driver, "Orders");
 		OrderHistoryPage = PageGeneratorManager.getOrderHistoryPage(driver);
 
-		verifyEquals(OrderHistoryPage.getOrderNumber(driver), "ORDER NUMBER: '" + orderNumber + "'");
+		verifyEquals(OrderHistoryPage.getOrderNumber(driver), "Order Number: " + orderNumber);
 		OrderHistoryPage.clickToDetailOrderByText(driver, orderNumber);
 	}
 
-//	@Test
+	@Test
 	public void TC_06_Check_out_Payment_With_Card() {
 		log.info("Pre-condition - Step 04: Go to product sub category page");
 		productDetailPage.openTopMenuSubPageByText(driver, "Computers", "Notebooks");
@@ -412,25 +412,21 @@ public class Module_07_Order extends BaseTest {
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-payment_info", "Continue");
 
 		log.info("Pre-condition - Step 05: Verify Billing address info");
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "name"), firstName + lastName);
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "email"),
-				"Email: '" + emailAddress + "'");
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "phone"),
-				"Phone: '" + phoneNumber + "'");
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "name"), firstName + " " + lastName);
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "phone"), "Phone: " + phoneNumber);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "address1"), address1);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "city-state-zip"),
-				"'" + city + "','" + zipcode + "'");
+				city + "," + zipcode);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "country"), country1);
 
 		log.info("Pre-condition - Step 05: Verify Shipping address info");
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "name"), userName);
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "email"),
-				"Email: '" + emailAddress + "'");
-		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "phone"),
-				"Phone: '" + phoneNumber + "'");
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "phone"), "Phone: " + phoneNumber);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "address1"), address1);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "city-state-zip"),
-				"'" + city + "','" + state2 + "','" + zipcode + "'");
+				city + "," + state2 + "," + zipcode);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "country"), country2);
 
 		log.info("Pre-condition - Step 05: Verify Payment method");
@@ -464,7 +460,7 @@ public class Module_07_Order extends BaseTest {
 		myAccountPage.openSidePageByText(driver, "Orders");
 		OrderHistoryPage = PageGeneratorManager.getOrderHistoryPage(driver);
 
-		verifyEquals(OrderHistoryPage.getOrderNumber(driver), "ORDER NUMBER: '" + orderNumber + "'");
+		verifyEquals(OrderHistoryPage.getOrderNumber(driver), "Order Number: " + orderNumber);
 		OrderHistoryPage.clickToDetailOrderByText(driver, orderNumber);
 
 		log.info("Pre-condition - Step 05: open My account page ");
@@ -473,6 +469,11 @@ public class Module_07_Order extends BaseTest {
 		myAccountPage.openSidePageByText(driver, "Orders");
 		OrderHistoryPage = PageGeneratorManager.getOrderHistoryPage(driver);
 
+	}
+
+	@AfterClass
+	public void afterClass() {
+		driver.quit();
 	}
 
 	private int getRandomNumber() {

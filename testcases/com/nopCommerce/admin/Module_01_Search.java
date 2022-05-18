@@ -2,19 +2,23 @@ package com.nopCommerce.admin;
 
 import java.util.Random;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
 import commons.PageGeneratorManager;
+import enviromentConfig.Enviroment;
 import pageObjects.nopCommerce.admin.HomepageAdminPO;
 import pageObjects.nopCommerce.admin.LoginAdminPO;
 import pageObjects.nopCommerce.admin.ProductDetailPO;
 import pageObjects.nopCommerce.admin.ProductListPO;
 
 public class Module_01_Search extends BaseTest {
+	Enviroment enviroment;
 	WebDriver driver;
 	HomepageAdminPO homePage;
 	LoginAdminPO adminLoginPage;
@@ -22,25 +26,31 @@ public class Module_01_Search extends BaseTest {
 	ProductDetailPO ProductDetailPage;
 	String productName, SKU, price, stockQuantity;
 
-	@Parameters({ "browser", "url" })
+	@Parameters({ "envName", "severName", "browser", "ipAddress", "portNumber", "osName" })
 	@BeforeClass
-	public void BeforeClass(String browserName, String appUrl) {
+	public void BeforeClass(@Optional("local") String envName, @Optional("testing") String severName,
+			@Optional("chrome") String browserName, @Optional("localhost") String ipAddress,
+			@Optional("4444") String portNumber, @Optional("Windows 10") String osName) {
+		ConfigFactory.setProperty("env", severName);
+		enviroment = ConfigFactory.create(Enviroment.class);
 		productName = "Lenovo IdeaCentre 600 All-in-One PC";
 		SKU = "LE_IC_600";
 		price = "500";
 		stockQuantity = "10000";
 
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + appUrl + "' ");
+		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '"
+				+ enviroment.adminAppUrl() + "' ");
 
-		driver = getBrowserDriver(browserName, appUrl);
+		driver = getBrowserDriver(envName, enviroment.adminAppUrl(), browserName, ipAddress, portNumber, osName);
 		adminLoginPage = PageGeneratorManager.getLoginAdminPage(driver);
 
 		log.info("Pre-condition - Step 02: Login with Admin account");
-		adminLoginPage.enterTextToTextboxByName(driver, "Email", "admin@yourstore.com");
-		adminLoginPage.enterTextToTextboxByName(driver, "Password", "admin");
+		adminLoginPage.enterTextToTextboxByName(driver, "Email", enviroment.adminAppname());
+		adminLoginPage.enterTextToTextboxByName(driver, "Password", enviroment.adminAppPassword());
 		adminLoginPage.clickToButtonByText(driver, "Log in");
 		homePage = PageGeneratorManager.gethomepageAdmin(driver);
 
+		log.info("Pre-condition - Step 03: Open Products page");
 		homePage.openSideMenuPageByText(driver, "Catalog");
 		homePage.openSubSideMenuPageByText(driver, " Products");
 		productListPage = PageGeneratorManager.getProductListPage(driver);
@@ -48,84 +58,104 @@ public class Module_01_Search extends BaseTest {
 
 	@Test
 	public void TC_01_Search() {
+		log.info("Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
+		log.info("Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
-		log.info("Search 01 - Verify search info");
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Product name", "1"), productName);
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "SKU", "1"), SKU);
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Price", "1"), price);
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Stock quantity", "1"),
-				stockQuantity);
-		verifyTrue(productListPage.ischeckIconDisplayed(driver, "Published", "1", "true"));
+		log.info("Search 01 - Step 3: Verify search info");
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "Product name", "1"), productName);
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "SKU", "1"), SKU);
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "Price", "1"), price);
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "Stock quantity", "1"), stockQuantity);
+		verifyTrue(productListPage.ischeckIconDisplayed(driver, "products-grid_wrapper", "Published", "1", "true"));
 	}
 
 	@Test
 	public void TC_02_Search_With_Product_Name_ParentCategory_Unchecked() {
+		log.info("Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
+		
 		productListPage.selectOptionInDropdownByText(driver, "SearchCategoryId", "Computers");
-		productListPage.uncheckToCheckboxByLabel(driver, "SearchIncludeSubCategories");
-
+		productListPage.uncheckToCheckboxByLabelOnAdminPage(driver, "SearchIncludeSubCategories");
+		
+		log.info("Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
 
-		log.info("Search 01 - Verify no data message");
+		log.info("Search 02 - Verify no data message");
 
-		verifyEquals(productListPage.getEmptyMessageValue(driver), "No data available in table");
+		verifyEquals(productListPage.getEmptyMsgAtTableByText(driver,"products-grid_wrapper"), "No data available in table");
 	}
 
 	@Test
 	public void TC_03_Search_With_Product_Name_ParentCategory_Checked() {
+		log.info("Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
 		productListPage.selectOptionInDropdownByText(driver, "SearchCategoryId", "Computers");
-		productListPage.checkToCheckboxByLabel(driver, "SearchIncludeSubCategories");
-
+		productListPage.checkToCheckboxByLabelOnAdminPage(driver, "SearchIncludeSubCategories");
+		log.info("Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
-		log.info("Search 01 - Verify search info");
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Product name", "1"), productName);
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "SKU", "1"), SKU);
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Price", "1"), price);
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Stock quantity", "1"),
-				stockQuantity);
+		log.info("Search 03 - Verify search info");
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "Product name", "1"), productName);
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "SKU", "1"), SKU);
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "Price", "1"), price);
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "Stock quantity", "1"), stockQuantity);
 
 	}
 
 	@Test
 	public void TC_04_Search_With_Product_Name_Child_Category() {
+		log.info("Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
 		productListPage.selectOptionInDropdownByText(driver, "SearchCategoryId", "Computers >> Desktops");
-		productListPage.uncheckToCheckboxByLabel(driver, "SearchIncludeSubCategories");
-
+		productListPage.checkToCheckboxByLabelOnAdminPage(driver, "SearchIncludeSubCategories");
+		log.info("Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
-		log.info("Search 01 - Verify search info");
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Product name", "1"), productName);
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "SKU", "1"), SKU);
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Price", "1"), price);
-		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndex(driver, "Stock quantity", "1"),
-				stockQuantity);
+		log.info("Search 04 - Verify search info");
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "Product name", "1"), productName);
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "SKU", "1"), SKU);
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "Price", "1"), price);
+		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
+				"products-grid_wrapper", "Stock quantity", "1"), stockQuantity);
 
 	}
 
 	@Test
 	public void TC_05_Search_With_Manufactuters() {
+		log.info("Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
 		productListPage.selectOptionInDropdownByText(driver, "SearchCategoryId", "All");
-		productListPage.uncheckToCheckboxByLabel(driver, "SearchIncludeSubCategories");
+		productListPage.checkToCheckboxByLabelOnAdminPage(driver, "SearchIncludeSubCategories");
 		productListPage.selectOptionInDropdownByText(driver, "SearchManufacturerId", "Apple");
-
+		log.info("Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
-		log.info("Search 01 - Verify no data message");
+		log.info("Search 05 - Verify no data message");
 
-		verifyEquals(productListPage.getEmptyMessageValue(driver), "No data available in table");
+		verifyEquals(productListPage.getEmptyMsgAtTableByText(driver,"products-grid_wrapper"), "No data available in table");
 	}
+
 	@Test
 	public void TC_06_Search_With_SKU() {
+		log.info("Search 06 - Step 1: Enter text into SKU textbox");
 		productListPage.enterTextToTextboxByName(driver, "GoDirectlyToSku", SKU);
 		
+		log.info("Search 06 - Step 2: Click Go button");
 		productListPage.clickToButtonByText(driver, "Go");
-		log.info("Search 01 - Verify product detail page displays");
 		ProductDetailPage = PageGeneratorManager.getProductDetailPageAdmin(driver);
-
-		verifyEquals(productListPage.getPageTitle(driver), "Edit product details - Lenovo IdeaCentre 600 All-in-One PC");
-		verifyEquals(productListPage.getTextboxValueByName(driver, "Name"),"Lenovo IdeaCentre 600 All-in-One PC");
+		
+		log.info("Search 06 - Step 3: Verify product detail page displays");
+		verifyTrue(productListPage.isPageTitleDisplayed(driver,"Lenovo IdeaCentre 600 All-in-One PC"));
+		verifyEquals(productListPage.getTextboxValueByName(driver, "Name"), "Lenovo IdeaCentre 600 All-in-One PC");
 	}
 
 	private int getRandomNumber() {

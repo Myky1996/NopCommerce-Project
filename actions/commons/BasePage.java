@@ -48,6 +48,13 @@ public class BasePage {
 		return driver.manage().getCookies();
 	}
 
+	public void setCookies(WebDriver driver, Set<Cookie> cookies) {
+		for (Cookie cookie : cookies) {
+			driver.manage().addCookie(cookie);
+		}
+		sleepInSecond(3);
+	}
+
 	public void backToPage(WebDriver driver) {
 		driver.navigate().back();
 	}
@@ -492,8 +499,8 @@ public class BasePage {
 	}
 
 	public void clickToRadioButtonByLabel(WebDriver driver, String radioName) {
-		waitForElementClickable(driver, BasePageUI.RADIO_BUTTON_BY_ID, radioName);
-		checkToDefaultCheckbox(driver, BasePageUI.RADIO_BUTTON_BY_ID, radioName);
+		waitForElementClickable(driver, BasePageUI.RADIO_BUTTON_BY_TEXT, radioName);
+		checkToDefaultCheckbox(driver, BasePageUI.RADIO_BUTTON_BY_TEXT, radioName);
 	}
 
 	public void selectOptionInDropdownByText(WebDriver driver, String dropdownName, String selectValue) {
@@ -509,8 +516,8 @@ public class BasePage {
 	}
 
 	public boolean isRadiobuttonSelected(WebDriver driver, String radioButton) {
-		waitForElementVisible(driver, BasePageUI.RADIO_BUTTON_BY_ID, radioButton);
-		return isElementSelected(driver, BasePageUI.RADIO_BUTTON_BY_ID, radioButton);
+		waitForElementVisible(driver, BasePageUI.RADIO_BUTTON_BY_TEXT, radioButton);
+		return isElementSelected(driver, BasePageUI.RADIO_BUTTON_BY_TEXT, radioButton);
 	}
 
 	public void openSidePageByText(WebDriver driver, String pageName) {
@@ -523,9 +530,9 @@ public class BasePage {
 		return getElementText(driver, BasePageUI.SUCCESS_ALERT_BY_CLASS, alertCLass);
 	}
 
-	public void closeSuccesNotiBarByText(WebDriver driver) {
-		waitForElementClickable(driver, BasePageUI.CLOSE_SUCCESS_NOTI_BAR_BUTTON);
-		clickToElement(driver, BasePageUI.CLOSE_SUCCESS_NOTI_BAR_BUTTON);
+	public void closeNotiBarByText(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.CLOSE_NOTI_BAR_BUTTON);
+		clickToElement(driver, BasePageUI.CLOSE_NOTI_BAR_BUTTON);
 	}
 
 	public void openTopMenuPageByText(WebDriver driver) {
@@ -599,11 +606,15 @@ public class BasePage {
 				String.valueOf(columnIndex));
 	}
 
-	public boolean ischeckIconDisplayed(WebDriver driver, String headerName, String rowIndex, String iconStatus) {
-		int columnIndex = getElementSize(driver, BasePageUI.TABLE_HEADER_NAME_BY_ACTION_AND_NAME, headerName) + 1;
-		waitForElementVisible(driver, BasePageUI.STATUS_ICON_AT_TABLE_ROW_NAME_BY_COLUMN_INDEX_AND_ROW_INDEX, rowIndex,
-				String.valueOf(columnIndex), iconStatus);
-		return isElementDisplayed(driver, BasePageUI.STATUS_ICON_AT_TABLE_ROW_NAME_BY_COLUMN_INDEX_AND_ROW_INDEX,
+	public boolean ischeckIconDisplayed(WebDriver driver, String cardTitleByID, String headerName, String rowIndex,
+			String iconStatus) {
+		int columnIndex = getElementSize(driver, BasePageUI.TABLE_HEADER_NAME_BY_ACTION_AND_NAME_AND_CARDTITLE,
+				cardTitleByID, headerName) + 1;
+		waitForElementVisible(driver,
+				BasePageUI.STATUS_ICON_AT_TABLE_ROW_NAME_BY_BY_COLUMN_INDEX_AND_ROW_INDEX_AND_CARDTITLE, cardTitleByID,
+				rowIndex, String.valueOf(columnIndex), iconStatus);
+		return isElementDisplayed(driver,
+				BasePageUI.STATUS_ICON_AT_TABLE_ROW_NAME_BY_BY_COLUMN_INDEX_AND_ROW_INDEX_AND_CARDTITLE, cardTitleByID,
 				rowIndex, String.valueOf(columnIndex), iconStatus);
 	}
 
@@ -826,9 +837,9 @@ public class BasePage {
 		return getElementText(driver, BasePageUI.NO_DATA_MSG_AT_TABLE_BY_TEXT, cardName);
 	}
 
-	public String getPageTitle(WebDriver driver) {
-		waitForElementVisible(driver, BasePageUI.PAGE_TITLE);
-		return getElementText(driver, BasePageUI.PAGE_TITLE);
+	public boolean isPageTitleDisplayed(WebDriver driver, String productName) {
+		waitForElementVisible(driver, BasePageUI.PAGE_TITLE, productName);
+		return isElementDisplayed(driver, BasePageUI.PAGE_TITLE, productName);
 	}
 
 	public String getTextboxValueByName(WebDriver driver, String textboxName) {
@@ -840,7 +851,15 @@ public class BasePage {
 		waitForElementVisible(driver, BasePageUI.TEXTAREA_FIELD_BY_NAME, textareaName);
 		return getElementText(driver, BasePageUI.TEXTAREA_FIELD_BY_NAME, textareaName);
 	}
-
+	public void checkToCheckboxByLabelOnAdminPage(WebDriver driver, String checkboxName) {
+		waitForElementClickable(driver, BasePageUI.CHECK_BOX_BY_ID_ADMIN,checkboxName);
+		checkToDefaultCheckbox(driver, BasePageUI.CHECK_BOX_BY_ID_ADMIN, checkboxName);
+	}
+	public void uncheckToCheckboxByLabelOnAdminPage(WebDriver driver, String checkboxName) {
+		waitForElementClickable(driver, BasePageUI.CHECK_BOX_BY_ID_ADMIN,checkboxName);
+		unCheckToDefaultCheckbox(driver, BasePageUI.CHECK_BOX_BY_ID_ADMIN, checkboxName);
+	}
+	
 	public boolean isCheckboxSelectedByID(WebDriver driver, String checkboxName) {
 		waitForElementVisible(driver, BasePageUI.CHECK_BOX_BY_ID_ADMIN, checkboxName);
 		return isElementSelected(driver, BasePageUI.CHECK_BOX_BY_ID_ADMIN, checkboxName);
@@ -867,6 +886,8 @@ public class BasePage {
 	public void selectOptionInTagList(WebDriver driver, String selectedValue) {
 		waitForElementClickable(driver, BasePageUI.TAG_LIST_TEXTBOX);
 		pressKeyToElement(driver, BasePageUI.TAG_LIST_TEXTBOX, Keys.BACK_SPACE);
+		
+		waitForElementClickable(driver, BasePageUI.TAG_LIST_TEXTBOX);
 		sendKeyToElement(driver, BasePageUI.TAG_LIST_TEXTBOX, selectedValue);
 		sleepInSecond(2);
 		pressKeyToElement(driver, BasePageUI.TAG_LIST_TEXTBOX, Keys.ENTER);
@@ -900,5 +921,5 @@ public class BasePage {
 		return getElementText(driver, BasePageUI.TABLE_ROW_NAME_BY_COLUMN_INDEX_AND_ROW_INDEX_AND_CARDTITLE,
 				cardTitleByID, rowIndex, String.valueOf(columnIndex));
 	}
-
+	
 }

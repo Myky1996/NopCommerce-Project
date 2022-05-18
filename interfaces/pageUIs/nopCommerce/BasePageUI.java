@@ -9,17 +9,17 @@ public class BasePageUI {
 	public final static String BUTTON_BY_TEXT = "//button[contains(string(),'%s')]";
 	public final static String LINK_BY_TEXT = "//a[contains(string(),'%s')]";
 	public final static String BUTTONS_AT_PRODUCT_LIST_BY_TEXT = "//a[text()='%s']/parent::h2//following-sibling::div[@class='add-info']//button[text()='%s']";
-	public final static String RADIO_BUTTON_BY_ID = "//label[contains(string(),'%s')]//preceding-sibling::input";
+	public final static String RADIO_BUTTON_BY_TEXT = "//label[contains(string(),'%s')]//preceding-sibling::input";
 	public final static String DROPDOWN_BY_NAME = "//select[@name='%s']";
-	public final static String SUCCESS_ALERT_BY_CLASS = "//div[contains(@class,'%s')]/button";
-	public final static String CLOSE_SUCCESS_NOTI_BAR_BUTTON= "//div[@class='bar-notification success']//span";
+	public final static String SUCCESS_ALERT_BY_CLASS = "//div[@class='%s']/p";
+	public final static String CLOSE_NOTI_BAR_BUTTON= "//div[@class='bar-notification success']/span";
 	public final static String TOP_MENU_PAGE_BY_TEXT= "//ul[@class='top-menu notmobile']//a[contains(string(),'%s')]";
 	public final static String TOP_MENU_SUBPAGE_BY_TEXT= "//ul[@class='top-menu notmobile']//a[contains(string(),'%s')]/following-sibling::ul//a[contains(string(),'%s')]";
 	public final static String PRODUCT_TITLE_BY_TEXT= "//h2[@class='product-title']/a[text()='%s']";
 	public final static String DISPLAYED_REVIEW_INFO= "//div[@class='%s']";
 	public final static String TABLE_HEADER_NAME_BY_ACTION_AND_NAME= "//th[contains(text(),'%s')]/preceding-sibling::th";
-	public final static String TABLE_ROW_NAME_BY_COLUMN_INDEX_AND_ROW_INDEX= "//tbody//tr[%s]/td[%s]";
-	public final static String TABLE_CHECKBOX_BY_COLUMN_INDEX_AND_ROW_INDEX= "//tbody//tr[%s]/td[%s]/input";
+	public final static String TABLE_ROW_NAME_BY_COLUMN_INDEX_AND_ROW_INDEX= "//table[@class='cart']//tbody/tr[%s]/td[%s]";
+	public final static String TABLE_CHECKBOX_BY_COLUMN_INDEX_AND_ROW_INDEX= "//table[@class='cart']//tbody/tr[%s]/td[%s]/input";
 	public final static String TABLE_BUTTON_BY_COLUMN_INDEX_AND_ROW_INDEX= "//tbody//tr[%s]/td[%s]/button";
 	public final static String TABLE_LINK_BY_COLUMN_INDEX_AND_ROW_INDEX= "//tbody//tr[%s]//td[%s]/div[@class='edit-item']/a";
 	public final static String TABLE_TEXTBOX_BY_COLUMN_INDEX_AND_ROW_INDEX= "//tbody//tr[%s]/td[%s]/input";
@@ -45,10 +45,10 @@ public class BasePageUI {
 //	Admin:
 	public final static String SIDE_MENU_BY_TEXT = "//p[contains(string(),'%s')]/i";
 	public final static String SUB_SIDE_MENU_BY_TEXT = "//p[text()='%s']";
-	public final static String STATUS_ICON_AT_TABLE_ROW_NAME_BY_COLUMN_INDEX_AND_ROW_INDEX = "//tbody/tr[%s]/td[%s]/i[contains(@class,'%s-icon')]";
+	public final static String STATUS_ICON_AT_TABLE_ROW_NAME_BY_BY_COLUMN_INDEX_AND_ROW_INDEX_AND_CARDTITLE = "//div[@id='%s']//tbody/tr[%s]/td[%s]/i[contains(@class,'%s-icon')]";
 	public final static String CHECKBOX_BY_NAME = "//input[@name='%s']";
 	public final static String NO_DATA_MSG_AT_TABLE_BY_TEXT = "//div[@id='%s']//td[@class='dataTables_empty']";
-	public final static String PAGE_TITLE = "//div[@class='content-header clearfix']/h1";
+	public final static String PAGE_TITLE = "//h1[contains(text(),'%s')]";
 	public final static String CHECK_BOX_BY_ID_ADMIN = "//input[@id='%s']";
 	public final static String TOGGLE_ICON_BY_CARDNAME = "//div[@class='card-title' and contains(string(),'%s')]/following-sibling::div//i";
 	public final static String TOGGLE_ICON_SEARCH_BOX = "//div[@class='icon-collapse']/i";
