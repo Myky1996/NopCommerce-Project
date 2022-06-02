@@ -50,6 +50,11 @@
 	<classpathentry kind="lib" path="library/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="library/mockito-core-2.23.4.jar"/>
 	<classpathentry kind="lib" path="library/owner-1.0.12.jar"/>
+	<classpathentry kind="lib" path="libExtentReportV5/extentreports-5.0.8.jar"/>
+	<classpathentry kind="lib" path="libExtentReportV5/freemarker-2.3.30.jar"/>
+	<classpathentry kind="lib" path="libExtentReportV5/lombok-1.18.12.jar"/>
+	<classpathentry kind="lib" path="libExtentReportV5/reactive-streams-1.0.3.jar"/>
+	<classpathentry kind="lib" path="libExtentReportV5/rxjava-3.0.4.jar"/>
 	<classpathentry kind="src" path="interfaces"/>
 	<classpathentry kind="src" path="actions"/>
 	<classpathentry kind="src" path="testcases"/>

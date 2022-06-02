@@ -9,6 +9,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+
 import commons.BaseTest;
 import commons.PageGeneratorManager;
 import enviromentConfig.Enviroment;
@@ -18,6 +20,7 @@ import pageObjects.nopCommerce.admin.CustomerDetailPO;
 import pageObjects.nopCommerce.admin.CustomerListPO;
 import pageObjects.nopCommerce.admin.HomepageAdminPO;
 import pageObjects.nopCommerce.admin.LoginAdminPO;
+import reportConfig.ExtentTestManager;
 
 public class Module_02_Customer extends BaseTest {
 	Enviroment enviroment;
@@ -73,19 +76,19 @@ public class Module_02_Customer extends BaseTest {
 		editPhoneNumber = "0987654666";
 		editFaxNumber = "+4416199998888";
 
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '"
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '"
 				+ enviroment.adminAppUrl() + "' ");
 
 		driver = getBrowserDriver(envName, enviroment.adminAppUrl(), browserName, ipAddress, portNumber, osName);
 		adminLoginPage = PageGeneratorManager.getLoginAdminPage(driver);
 
-		log.info("Pre-condition - Step 02: Login with Admin account");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 02: Login with Admin account");
 		adminLoginPage.enterTextToTextboxByName(driver, "Email", enviroment.adminAppname());
 		adminLoginPage.enterTextToTextboxByName(driver, "Password", enviroment.adminAppPassword());
 		adminLoginPage.clickToButtonByText(driver, "Log in");
 		homePage = PageGeneratorManager.gethomepageAdmin(driver);
 
-		log.info("Pre-condition - Step 03: Open Customer page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 03: Open Customer page");
 		homePage.openSideMenuPageByText(driver, "Customers");
 		homePage.openSubSideMenuPageByText(driver, " Customers");
 		CustomerListPage = PageGeneratorManager.getCustomerListPage(driver);
@@ -95,12 +98,12 @@ public class Module_02_Customer extends BaseTest {
 	@Test
 	public void TC_07_Create_New_Customer() {
 
-		log.info("TC_07 Step 01: Click 'Add new' button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_07 Step 01: Click 'Add new' button");
 		CustomerListPage.clicktoLinkByText(driver, "Add new");
 
 		AddNewCustomerPage = PageGeneratorManager.getAddCustomerPage(driver);
 
-		log.info("TC_07 - Step 02: Enter info in fields");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_07 - Step 02: Enter info in fields");
 
 		AddNewCustomerPage.clickToExtendButtonByCardName(driver, "Customer info");
 		AddNewCustomerPage.enterTextToTextboxByName(driver, "Email", emailAddress);
@@ -114,12 +117,12 @@ public class Module_02_Customer extends BaseTest {
 		AddNewCustomerPage.selectOptionInTagList(driver, customerRole);
 		AddNewCustomerPage.enterTextToTextAreaByName(driver, "AdminComment", adminComment);
 
-		log.info("TC_07 - Step 03: Click Save and Continue button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_07 - Step 03: Click Save and Continue button");
 
 		AddNewCustomerPage.clickToButtonByText(driver, "Save and Continue Edit");
 		AddNewCustomerPage.sleepInSecond(2);
 
-		log.info("TC_07 - Step 04: Verify customer is added successfully");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_07 - Step 04: Verify customer is added successfully");
 
 		verifyTrue(AddNewCustomerPage.isSuccessAlertDisplayedAdmin(driver,
 				"The new customer has been added successfully."));
@@ -133,7 +136,7 @@ public class Module_02_Customer extends BaseTest {
 		verifyTrue(AddNewCustomerPage.isCheckboxSelectedByID(driver, "Active"));
 		verifyEquals(AddNewCustomerPage.getTextareaValueByName(driver, "AdminComment"), adminComment);
 
-		log.info("TC_07 - Step 05: Click Go back to customer list");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_07 - Step 05: Click Go back to customer list");
 
 		AddNewCustomerPage.clicktoLinkByText(driver, "back to customer list");
 		CustomerListPage = PageGeneratorManager.getCustomerListPage(driver);
@@ -142,7 +145,7 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.selectOptionInTagList(driver, customerRole);
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
-		log.info("TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_07 - Step 06: Verify user info is displayed correctly at Customer List Page");
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
 				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
@@ -155,16 +158,16 @@ public class Module_02_Customer extends BaseTest {
 
 	@Test
 	public void TC_08_Search_Customer_With_Email() {
-		log.info("TC_08 - Step 01: Enter email address into search field");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_08 - Step 01: Enter email address into search field");
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchEmail", emailAddress);
 
-		log.info("TC_08 - Step 02: Select guests tag");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_08 - Step 02: Select guests tag");
 		CustomerListPage.selectOptionInTagList(driver, "Guests");
 
-		log.info("TC_08 - Step 03: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_08 - Step 03: Click search button");
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
-		log.info("TC_08 - Step 04: Verify customer info");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_08 - Step 04: Verify customer info");
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
 				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
@@ -176,19 +179,19 @@ public class Module_02_Customer extends BaseTest {
 
 	@Test
 	public void TC_09_Search_Customer_With_Firstname_and_Lastname() {
-		log.info("TC_09 - Step 01: Enter firstname into Firstname textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_09 - Step 01: Enter firstname into Firstname textbox");
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchFirstName", Firstname);
 
-		log.info("TC_09 - Step 02: Enter Lastname into Lastname textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_09 - Step 02: Enter Lastname into Lastname textbox");
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchLastName", Lastname);
 
-		log.info("TC_09 - Step 03: Select guests tag");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_09 - Step 03: Select guests tag");
 		CustomerListPage.selectOptionInTagList(driver, "Guests");
 
-		log.info("TC_09 - Step 04: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_09 - Step 04: Click search button");
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
-		log.info("TC_09 - Step 05: Verify customer info");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_09 - Step 05: Verify customer info");
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
 				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
@@ -201,16 +204,16 @@ public class Module_02_Customer extends BaseTest {
 
 	@Test
 	public void TC_10_Search_Customer_With_Company() {
-		log.info("TC_10 - Step 01: Enter text into Company textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_10 - Step 01: Enter text into Company textbox");
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchCompany", company);
 
-		log.info("TC_10 - Step 02: Select guests tag");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_10 - Step 02: Select guests tag");
 		CustomerListPage.selectOptionInTagList(driver, "Guests");
 
-		log.info("TC_10 - Step 03: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_10 - Step 03: Click search button");
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
-		log.info("TC_10 - Step 04: Verify customer info");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_10 - Step 04: Verify customer info");
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
 				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
@@ -223,7 +226,7 @@ public class Module_02_Customer extends BaseTest {
 
 	@Test
 	public void TC_11_Search_Customer_With_Full_Data() {
-		log.info("TC_11 - Step 01: Enter info into search fields");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_11 - Step 01: Enter info into search fields");
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchEmail", emailAddress);
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchFirstName", Firstname);
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchLastName", Lastname);
@@ -231,13 +234,13 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.selectOptionInDropdownByText(driver, "SearchDayOfBirth", "1");
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchCompany", company);
 
-		log.info("TC_11 - Step 02: Select guests tag");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_11 - Step 02: Select guests tag");
 		CustomerListPage.selectOptionInTagList(driver, "Guests");
 
-		log.info("TC_11 - Step 03: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_11 - Step 03: Click search button");
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
-		log.info("TC_11 - Step 04: Verify customer info");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_11 - Step 04: Verify customer info");
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
 				"customers-grid_wrapper", "Name", "1"), Firstname + " " + Lastname);
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
@@ -250,14 +253,14 @@ public class Module_02_Customer extends BaseTest {
 
 	@Test
 	public void TC_12_Edit_Customer() {
-		log.info("TC_12 - Step 01: Click Edit link");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_12 - Step 01: Click Edit link");
 		CustomerListPage.clickToLinkButtonAtTableByRowIndex(driver, "Edit", "1");
 		CustomerDetailPage = PageGeneratorManager.getCustomerDetailPage(driver);
 
-		log.info("TC_12 - Step 02: Click Extend button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_12 - Step 02: Click Extend button");
 		CustomerDetailPage.clickToExtendButtonByCardName(driver, "Customer info");
 
-		log.info("TC_12 - Step 03: Enter text into textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_12 - Step 03: Enter text into textbox");
 		CustomerDetailPage.enterTextToTextboxByName(driver, "Email", editEmailAddress);
 		CustomerDetailPage.enterTextToTextboxByName(driver, "FirstName", editFirstname);
 		CustomerDetailPage.enterTextToTextboxByName(driver, "LastName", editLastname);
@@ -265,15 +268,15 @@ public class Module_02_Customer extends BaseTest {
 		CustomerDetailPage.enterTextToTextboxByName(driver, "Company", editCompany);
 		CustomerDetailPage.enterTextToTextAreaByName(driver, "AdminComment", editAdminComment);
 
-		log.info("TC_12 - Step 04: Click Save button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_12 - Step 04: Click Save button");
 		CustomerDetailPage.clickToButtonByText(driver, "Save");
 
-		log.info("TC_12 - Step 05: Verify success message display");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_12 - Step 05: Verify success message display");
 		verifyTrue(
 				CustomerDetailPage.isSuccessAlertDisplayedAdmin(driver, "The customer has been updated successfully."));
 		CustomerListPage = PageGeneratorManager.getCustomerListPage(driver);
 
-		log.info("TC_12 - Step 06: Enter text into search fields");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_12 - Step 06: Enter text into search fields");
 
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchEmail", editEmailAddress);
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchFirstName", editFirstname);
@@ -282,13 +285,13 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.selectOptionInDropdownByText(driver, "SearchDayOfBirth", "2");
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchCompany", editCompany);
 
-		log.info("TC_12 - Step 07: Select Guest tag");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_12 - Step 07: Select Guest tag");
 		CustomerListPage.selectOptionInTagList(driver, "Guests");
 
-		log.info("TC_12 - Step 08: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_12 - Step 08: Click search button");
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
-		log.info("TC_12 - Step 09: Verify info displayed correctly");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_12 - Step 09: Verify info displayed correctly");
 
 		verifyEquals(CustomerListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,"customers-grid_wrapper", "Name", "1"),
 				editFirstname + " " + editLastname);
@@ -303,18 +306,18 @@ public class Module_02_Customer extends BaseTest {
 	@Test
 	public void TC_13_Add_New_Address_Customer_Detail() {
 
-		log.info("TC_13 - Step 01: Click Edit link");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_13 - Step 01: Click Edit link");
 		CustomerListPage.clickToLinkButtonAtTableByRowIndex(driver, "Edit", "1");
 		CustomerDetailPage = PageGeneratorManager.getCustomerDetailPage(driver);
 
-		log.info("TC_13 - Step 02: Click Extend button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_13 - Step 02: Click Extend button");
 		CustomerDetailPage.clickToExtendButtonByCardName(driver, "Addresses");
 
-		log.info("TC_13 - Step 03: Click 'Add new address' button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_13 - Step 03: Click 'Add new address' button");
 		CustomerDetailPage.clickToButtonByText(driver, "Add new address");
 		AddNewAddressPage = PageGeneratorManager.getAddNewAddressPage(driver);
 
-		log.info("TC_13 - Step 04: Enter info into textboxes");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_13 - Step 04: Enter info into textboxes");
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.FirstName", Firstname);
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.LastName", Lastname);
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.Email", emailAddress);
@@ -328,21 +331,21 @@ public class Module_02_Customer extends BaseTest {
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.PhoneNumber", phoneNumber);
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.FaxNumber", faxNumber);
 
-		log.info("TC_13 - Step 05: Click Save button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_13 - Step 05: Click Save button");
 		AddNewAddressPage.clickToButtonByText(driver, "Save");
 
-		log.info("TC_13 - Step 06: Verify success message displayed");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_13 - Step 06: Verify success message displayed");
 		verifyTrue(AddNewCustomerPage.isSuccessAlertDisplayedAdmin(driver,
 				"The new address has been added successfully."));
 
-		log.info("TC_13 - Step 07: Click Back to customer details link");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_13 - Step 07: Click Back to customer details link");
 		AddNewAddressPage.clicktoLinkByText(driver, "back to customer details");
 		CustomerDetailPage = PageGeneratorManager.getCustomerDetailPage(driver);
 
-		log.info("TC_13 - Step 08: Click extend button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_13 - Step 08: Click extend button");
 		CustomerDetailPage.clickToExtendButtonByCardName(driver, "Addresses");
 
-		log.info("TC_13 - Step 09: Verify info displayed correctly");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_13 - Step 09: Verify info displayed correctly");
 		verifyEquals(CustomerDetailPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver, "customer-address",
 				"First name", "1"), Firstname);
 		verifyEquals(CustomerDetailPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver, "customer-address",
@@ -361,15 +364,15 @@ public class Module_02_Customer extends BaseTest {
 
 	@Test
 	public void TC_14_Edit_Address_Customer_Detail() {
-		log.info("TC_14 - Step 01: Open Customer page");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 01: Open Customer page");
 		CustomerDetailPage.openSideMenuPageByText(driver, "Customers");
 		CustomerDetailPage.openSubSideMenuPageByText(driver, " Customers");
 		CustomerListPage = PageGeneratorManager.getCustomerListPage(driver);
 
-		log.info("TC_14 - Step 02: Click Extend button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 02: Click Extend button");
 		CustomerListPage.clickToExtendButtonSearchBox(driver);
 
-		log.info("TC_14 - Step 03: Enter info into textboxes");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 03: Enter info into textboxes");
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchEmail", editEmailAddress);
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchFirstName", editFirstname);
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchLastName", editLastname);
@@ -378,23 +381,23 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchCompany", editCompany);
 		CustomerListPage.sleepInSecond(2);
 
-		log.info("TC_14 - Step 04: Select Guest tag");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 04: Select Guest tag");
 		CustomerListPage.selectOptionInTagList(driver, "Guests");
 
-		log.info("TC_14 - Step 05: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 05: Click search button");
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
-		log.info("TC_14 - Step 06: Click Edit button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 06: Click Edit button");
 		CustomerListPage.clickToLinkButtonAtTableByRowIndex(driver, "Edit", "1");
 		CustomerDetailPage = PageGeneratorManager.getCustomerDetailPage(driver);
 
-		log.info("TC_14 - Step 07: Click Extend button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 07: Click Extend button");
 		CustomerDetailPage.clickToExtendButtonByCardName(driver, "Addresses");
 
-		log.info("TC_14 - Step 08: Click Edit button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 08: Click Edit button");
 		CustomerDetailPage.clickToLinkButtonAtTableByRowIndex(driver, "Edit", "1");
 
-		log.info("TC_14 - Step 09: Enter text into textboxes");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 09: Enter text into textboxes");
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.FirstName", editFirstname);
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.LastName", editLastname);
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.Email", emailAddress);
@@ -409,21 +412,21 @@ public class Module_02_Customer extends BaseTest {
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.PhoneNumber", editPhoneNumber);
 		AddNewAddressPage.enterTextToTextboxByName(driver, "Address.FaxNumber", editFaxNumber);
 
-		log.info("TC_14 - Step 10: Click Save button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 10: Click Save button");
 		AddNewAddressPage.clickToButtonByText(driver, "Save");
 
-		log.info("TC_14 - Step 11: Verify success message displayed");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 11: Verify success message displayed");
 		verifyTrue(
 				AddNewAddressPage.isSuccessAlertDisplayedAdmin(driver, "The address has been updated successfully."));
 
-		log.info("TC_14 - Step 12: Click Go back to customer details link");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 12: Click Go back to customer details link");
 		AddNewAddressPage.clicktoLinkByText(driver, "back to customer details");
 		CustomerDetailPage = PageGeneratorManager.getCustomerDetailPage(driver);
 
-		log.info("TC_14 - Step 13: Click Extend button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 13: Click Extend button");
 		CustomerDetailPage.clickToExtendButtonByCardName(driver, "Addresses");
 
-		log.info("TC_14 - Step 14: Verify info displayed correctly");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_14 - Step 14: Verify info displayed correctly");
 		verifyEquals(CustomerDetailPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver, "customer-address",
 				"First name", "1"), editFirstname);
 		verifyEquals(CustomerDetailPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver, "customer-address",
@@ -444,12 +447,12 @@ public class Module_02_Customer extends BaseTest {
 	@Test
 	public void TC_15_Delete_Address_Detail() {
 
-		log.info("TC_15 - Step 01: Open Customer page");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_15 - Step 01: Open Customer page");
 		CustomerDetailPage.openSideMenuPageByText(driver, "Customers");
 		CustomerDetailPage.openSubSideMenuPageByText(driver, " Customers");
 		CustomerListPage = PageGeneratorManager.getCustomerListPage(driver);
 
-		log.info("TC_15 - Step 02: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_15 - Step 02: Click search button");
 		CustomerListPage.clickToExtendButtonSearchBox(driver);
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchEmail", editEmailAddress);
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchFirstName", editFirstname);
@@ -458,26 +461,26 @@ public class Module_02_Customer extends BaseTest {
 		CustomerListPage.selectOptionInDropdownByText(driver, "SearchDayOfBirth", "2");
 		CustomerListPage.enterTextToTextboxByName(driver, "SearchCompany", editCompany);
 
-		log.info("TC_15 - Step 03: Select Guest tag");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_15 - Step 03: Select Guest tag");
 		CustomerListPage.selectOptionInTagList(driver, "Guests");
 
-		log.info("TC_15 - Step 04: Click Search button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_15 - Step 04: Click Search button");
 		CustomerListPage.clickToButtonByText(driver, "Search");
 
-		log.info("TC_15 - Step 05: Click Edit button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_15 - Step 05: Click Edit button");
 		CustomerListPage.clickToLinkButtonAtTableByRowIndex(driver, "Edit", "1");
 		CustomerDetailPage = PageGeneratorManager.getCustomerDetailPage(driver);
 
-		log.info("TC_15 - Step 06: Click Extend button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_15 - Step 06: Click Extend button");
 		CustomerDetailPage.clickToExtendButtonByCardName(driver, "Addresses");
 
-		log.info("TC_15 - Step 07: Click Delete button");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_15 - Step 07: Click Delete button");
 		CustomerDetailPage.clickToLinkButtonAtTableByRowIndex(driver, "Delete", "1");
 
-		log.info("TC_15 - Step 08: Accept alert");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_15 - Step 08: Accept alert");
 		CustomerDetailPage.acceptAlert(driver);
 
-		log.info("TC_15 - Step 09: Verify No data message in table");
+		ExtentTestManager.getTest().log(Status.INFO, "TC_15 - Step 09: Verify No data message in table");
 		verifyEquals(CustomerDetailPage.getEmptyMsgAtTableByText(driver, "customer-address"),
 				"No data available in table");
 	}

@@ -4,6 +4,7 @@
 	<parameter name="severName" value="testing" />
 	<listeners>
 		<listener class-name="commons.MethodListener" />
+		<listener class-name="reportConfig.ExtentTestListener" />
 
 	</listeners>
 
@@ -11,10 +12,9 @@
 	<test name="Run on Chrome">
 		<parameter name="browser" value="chrome" />
 		<classes>
-			<class
-				name="com.nopCommerce.common.Common_01_Register_to_system" />
-			<class name="com.nopCommerce.user.Module_07_Order" />
-			<!-- <class name="com.nopCommerce.user.Module_01_Register" /> -->
+			<!-- <class name="com.nopCommerce.common.Common_01_Register_to_system" />
+			<class name="com.nopCommerce.user.Module_07_Order" /> -->
+			<class name="com.nopCommerce.user.Module_01_Register" />
 		</classes>
 	</test>
 

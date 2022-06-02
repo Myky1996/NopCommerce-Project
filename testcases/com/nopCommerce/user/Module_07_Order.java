@@ -1,5 +1,6 @@
 package com.nopCommerce.user;
 
+import java.lang.reflect.Method;
 import java.util.Random;
 
 import org.aeonbits.owner.ConfigFactory;
@@ -10,6 +11,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.nopCommerce.common.Common_01_Register_to_system;
 
 import commons.BaseTest;
@@ -25,6 +27,7 @@ import pageObjects.nopCommerce.user.ProductDetailPO;
 import pageObjects.nopCommerce.user.Product_CatergoryListPO;
 import pageObjects.nopCommerce.user.TopMenuSubPagePO;
 import pageObjects.nopCommerce.user.WishlistPO;
+import reportConfig.ExtentTestManager;
 
 public class Module_07_Order extends BaseTest {
 	Enviroment enviroment;
@@ -67,7 +70,7 @@ public class Module_07_Order extends BaseTest {
 		Total = "$3,600.00";
 
 		enviroment = ConfigFactory.create(Enviroment.class);
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + enviroment.userAppUrl()
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + enviroment.userAppUrl()
 				+ "' ");
 
 		emailAddress = Common_01_Register_to_system.emailAddress;
@@ -79,57 +82,58 @@ public class Module_07_Order extends BaseTest {
 		driver = getBrowserDriver(envName, enviroment.userAppUrl(), browserName, ipAddress, portNumber, osName);
 		homePage = PageGeneratorManager.getHompageObject(driver);
 
-		log.info("Pre-condition - Step 02: Open 'Login' page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 02: Open 'Login' page");
 		homePage.openHeaderFooterPageByText(driver, "Log in");
 		loginPage = PageGeneratorManager.getLoginPageObject(driver);
 
-		log.info("Pre-condition - Step 03: Set cookies and reload page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 03: Set cookies and reload page");
 		loginPage.setCookies(driver, Common_01_Register_to_system.loginPageCookie);
 
 		loginPage.refreshCurrentPage(driver);
 		homePage = PageGeneratorManager.getHompageObject(driver);
 		loginPage.closeNotiBarByText(driver);
 
-		log.info("Pre-condition - Step 04: Go to product sub category page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 04: Go to product sub category page");
 		homePage.openTopMenuSubPageByText(driver, "Computers", "Desktops");
 		Product_CatergoryListPage = PageGeneratorManager.getProduct_CatergoryListPage(driver);
 
-		log.info("Pre-condition - Step 05: Open a product detail page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Open a product detail page");
 		Product_CatergoryListPage.clickToProductTitleByText(driver, "Build your own computer");
 		productDetailPage = PageGeneratorManager.getProductDetailPageObject(driver);
 
 	}
 
 	@Test
-	public void TC_01_Add_To_Wishlist() {
-		log.info("Add to cart - Step 01: Select processor");
+	public void TC_01_Add_To_Wishlist(Method method) {
+		ExtentTestManager.startTest(method.getName(), "Add to wishlist");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 01: Select processor");
 		productDetailPage.selectOptionInDropdownByText(driver, "product_attribute_1",
 				"2.5 GHz Intel Pentium Dual-Core E2200 [+$15.00]");
 
-		log.info("Add to cart - Step 02: Select RAM");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Select RAM");
 		productDetailPage.selectOptionInDropdownByText(driver, "product_attribute_2", "8GB [+$60.00]");
 
-		log.info("Add to cart - Step 02: Check to HDD radio button");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Check to HDD radio button");
 		productDetailPage.clickToRadioButtonByLabel(driver, "400 GB [+$100.00]");
 
-		log.info("Add to cart - Step 02: Select OS");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Select OS");
 		productDetailPage.clickToRadioButtonByLabel(driver, "Vista Premium [+$60.00]");
 
-		log.info("Add to cart - Step 02: Select Software");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Select Software");
 		productDetailPage.checkToCheckboxByLabel(driver, "Microsoft Office [+$50.00]");
 		productDetailPage.checkToCheckboxByLabel(driver, "Acrobat Reader [+$10.00]");
 		productDetailPage.checkToCheckboxByLabel(driver, "Total Commander [+$5.00]");
 
-		log.info("Add to cart - Step 02: Click to 'Add to cart' button");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Click to 'Add to cart' button");
 		productDetailPage.clickToButtonByText(driver, "Add to cart");
 
-		log.info("Add to cart - Step 0: verify 'Add to cart' success message");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 0: verify 'Add to cart' success message");
 		verifyEquals(productDetailPage.getSuccessMsgOnNotiBarByClass(driver, "bar-notification success"),
 				"The product has been added to your shopping cart");
 
 		productDetailPage.closeNotiBarByText(driver);
 
-		log.info("Add to cart - Step 0: verify product info at shopping cart page");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 0: verify product info at shopping cart page");
 		productDetailPage.hoverShoppingCartTooltip(driver);
 
 		verifyEquals(productDetailPage.getCartQuantity(driver), "(1)");
@@ -144,41 +148,43 @@ public class Module_07_Order extends BaseTest {
 	}
 
 	@Test
-	public void TC_02_Edit_Product_In_Shopping_Cart() {
+	public void TC_02_Edit_Product_In_Shopping_Cart(Method method) {
+		ExtentTestManager.startTest(method.getName(), "Edit product in shopping cart");
+
 		productDetailPage.openHeaderFooterPageByText(driver, "Shopping cart");
 		productDetailPage.clickToLinkAtTableByRowIndex(driver, "Product(s)", "1");
 
-		log.info("Add to cart - Step 01: Edit processor");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 01: Edit processor");
 		productDetailPage.selectOptionInDropdownByText(driver, "product_attribute_1",
 				"2.2 GHz Intel Pentium Dual-Core E2200");
 
-		log.info("Add to cart - Step 02: Edit RAM");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Edit RAM");
 		productDetailPage.selectOptionInDropdownByText(driver, "product_attribute_2", "4GB [+$20.00]");
 
-		log.info("Add to cart - Step 02: Edit HDD radio button");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Edit HDD radio button");
 		productDetailPage.clickToRadioButtonByLabel(driver, "320 GB");
 
-		log.info("Add to cart - Step 02: Edit OS");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Edit OS");
 		productDetailPage.clickToRadioButtonByLabel(driver, "Vista Home [+$50.00]");
 
-		log.info("Add to cart - Step 02: Edit Software");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Edit Software");
 		productDetailPage.uncheckToCheckboxByLabel(driver, "Acrobat Reader [+$10.00]");
 		productDetailPage.uncheckToCheckboxByLabel(driver, "Total Commander [+$5.00]");
 
-		log.info("Add to cart - Step 02: Edit Number of items");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Edit Number of items");
 		productDetailPage.sendkeyToQuantityTextbox(driver, "2");
 
-		log.info("Add to cart - Step 02: Verify price = $1320");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 02: Verify price = $1320");
 		verifyEquals(productDetailPage.getPriceValue(driver), "$1,320.00");
 
 		productDetailPage.clickToButtonByText(driver, "Update");
 
-		log.info("Add to cart - Step 0: verify 'Add to cart' success message");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 0: verify 'Add to cart' success message");
 		verifyEquals(productDetailPage.getSuccessMsgOnNotiBarByClass(driver, "bar-notification success"),
 				"The product has been added to your shopping cart");
 		productDetailPage.closeNotiBarByText(driver);
 
-		log.info("Add to cart - Step 0: verify updated info at shopping cart page");
+		ExtentTestManager.getTest().log(Status.INFO, "Add to cart - Step 0: verify updated info at shopping cart page");
 		productDetailPage.hoverShoppingCartTooltip(driver);
 
 		verifyEquals(productDetailPage.getCartQuantity(driver), "(2)");
@@ -192,19 +198,23 @@ public class Module_07_Order extends BaseTest {
 	}
 
 	@Test
-	public void TC_03_Remove_Product_From_Cart() {
+	public void TC_03_Remove_Product_From_Cart(Method method) {
+		ExtentTestManager.startTest(method.getName(), "Remove item from cart");
+
 		productDetailPage.openHeaderFooterPageByText(driver, "Shopping cart");
 		productDetailPage.clickToButtonxAtTableByRowIndex(driver, "Remove", "1");
 		verifyEquals(productDetailPage.getEmptyMessageValue(driver), "Your Shopping Cart is empty!");
 	}
 
 //	@Test
-	public void TC_04_Update_Shopping_Cart() {
-		log.info("Pre-condition - Step 04: Go to product sub category page");
+	public void TC_04_Update_Shopping_Cart(Method method) {
+		ExtentTestManager.startTest(method.getName(), "Update shopping cart");
+
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 04: Go to product sub category page");
 		homePage.openTopMenuSubPageByText(driver, "Computers", "Desktops");
 		Product_CatergoryListPage = PageGeneratorManager.getProduct_CatergoryListPage(driver);
 
-		log.info("Pre-condition - Step 05: Open a product detail page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Open a product detail page");
 		Product_CatergoryListPage.clickToProductTitleByText(driver, "Lenovo IdeaCentre 600 All-in-One PC");
 		productDetailPage = PageGeneratorManager.getProductDetailPageObject(driver);
 		productDetailPage.clickToButtonByText(driver, "Add to cart");
@@ -217,42 +227,44 @@ public class Module_07_Order extends BaseTest {
 	}
 
 	@Test
-	public void TC_05_Check_out() {
-		log.info("Pre-condition - Step 04: Go to product sub category page");
+	public void TC_05_Check_out(Method method) {
+		ExtentTestManager.startTest(method.getName(), "Check out");
+
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 04: Go to product sub category page");
 		productDetailPage.openTopMenuSubPageByText(driver, "Computers", "Notebooks");
 		Product_CatergoryListPage = PageGeneratorManager.getProduct_CatergoryListPage(driver);
 
-		log.info("Pre-condition - Step 05: Open a product detail page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Open a product detail page");
 		Product_CatergoryListPage.clickToProductTitleByText(driver, "Apple MacBook Pro 13-inch");
 		productDetailPage = PageGeneratorManager.getProductDetailPageObject(driver);
 
-		log.info("Pre-condition - Step 05: Click to Add to cart button ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Click to Add to cart button ");
 		productDetailPage.clickToButtonByText(driver, "Add to cart");
 
-		log.info("Pre-condition - Step 05: Open Shopping cart ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Open Shopping cart ");
 		productDetailPage.openHeaderFooterPageByText(driver, "Shopping cart");
 
-		log.info("Pre-condition - Step 05: Open Shopping cart ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Open Shopping cart ");
 		productDetailPage.clicktoLinkByText(driver, " Estimate shipping ");
 
-		log.info("Pre-condition - Step 05: Select Country ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Select Country ");
 		productDetailPage.selectOptionInDropdownByText(driver, "CountryId", "Viet Nam");
 
-		log.info("Pre-condition - Step 05: Enter zipcode ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Enter zipcode ");
 		productDetailPage.enterTextToTextboxByName(driver, "ZipPostalCode", "55000");
 		productDetailPage.sleepInSecond(3);
-		log.info("Pre-condition - Step 05: Click Apply button");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Click Apply button");
 		productDetailPage.clickToButtonByText(driver, "Apply");
 
-		log.info("Pre-condition - Step 05: Check to agree to service term checkbox ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Check to agree to service term checkbox ");
 		productDetailPage.checkToCheckboxByLabel(driver,
 				"I agree with the terms of service and I adhere to them unconditionally");
 
-		log.info("Pre-condition - Step 05: Click Checkout button ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Click Checkout button ");
 		productDetailPage.clickToButtonByText(driver, " Checkout ");
 		checkoutPage = PageGeneratorManager.getCheckoutPage(driver);
 
-		log.info("Pre-condition - Step 05: Enter info in Billing Address ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Enter info in Billing Address ");
 		checkoutPage.uncheckToCheckboxByLabel(driver, "Ship to the same address");
 		checkoutPage.enterTextToTextboxByName(driver, "BillingNewAddress.FirstName", firstName);
 		checkoutPage.enterTextToTextboxByName(driver, "BillingNewAddress.LastName", lastName);
@@ -265,7 +277,7 @@ public class Module_07_Order extends BaseTest {
 		checkoutPage.enterTextToTextboxByName(driver, "BillingNewAddress.PhoneNumber", phoneNumber);
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-billing", "Continue");
 
-		log.info("Pre-condition - Step 05: Enter info in Shipping Address ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Enter info in Shipping Address ");
 		checkoutPage.selectOptionInDropdownByText(driver, "shipping_address_id", "New Address");
 		checkoutPage.sleepInSecond(3);
 
@@ -280,16 +292,16 @@ public class Module_07_Order extends BaseTest {
 		checkoutPage.enterTextToTextboxByName(driver, "ShippingNewAddress.PhoneNumber", phoneNumber);
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-shipping", "Continue");
 
-		log.info("Pre-condition - Step 05: Select shipping method ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Select shipping method ");
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-shipping_method", "Continue");
 
-		log.info("Pre-condition - Step 05: Select payment method ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Select payment method ");
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-payment_method", "Continue");
 
-		log.info("Pre-condition - Step 05: Verify payment info ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Verify payment info ");
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-payment_info", "Continue");
 
-		log.info("Pre-condition - Step 05: Verify Billing address info");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Verify Billing address info");
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "name"), firstName + " " + lastName);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "email"), "Email: " + emailAddress);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "phone"), "Phone: " + phoneNumber);
@@ -298,7 +310,7 @@ public class Module_07_Order extends BaseTest {
 				city + "," + zipcode);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "country"), country1);
 
-		log.info("Pre-condition - Step 05: Verify Shipping address info");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Verify Shipping address info");
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "name"), userName);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "email"), "Email: " + emailAddress);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "phone"), "Phone: " + phoneNumber);
@@ -307,10 +319,10 @@ public class Module_07_Order extends BaseTest {
 				city + "," + state2 + "," + zipcode);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "country"), country2);
 
-		log.info("Pre-condition - Step 05: Verify Payment method");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Verify Payment method");
 		verifyEquals(checkoutPage.getPaymentMethodType(driver), "Check / Money Order");
 
-		log.info("Pre-condition - Step 05: Verify Shipping method");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Verify Shipping method");
 		verifyEquals(checkoutPage.getShippingMethodType(driver), "Ground");
 		verifyEquals(checkoutPage.getValueInTableAtColumnTableAndRowIndex(driver, "SKU", "1"), SKU);
 		verifyEquals(checkoutPage.getValueInTableAtColumnTableAndRowIndex(driver, "Product(s)", "1"), productName);
@@ -324,7 +336,7 @@ public class Module_07_Order extends BaseTest {
 		verifyEquals(checkoutPage.getOrderSummaryInfo(driver, "tax-value"), "$0.00");
 		verifyEquals(checkoutPage.getOrderSummaryInfo(driver, "order-total"), Total);
 
-		log.info("Pre-condition - Step 05: click Confirm button ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: click Confirm button ");
 		checkoutPage.clickToButtonByText(driver, "Confirm");
 
 		verifyEquals(checkoutPage.getOrderSuccessfullyMsg(driver), "Your order has been successfully processed!");
@@ -332,7 +344,7 @@ public class Module_07_Order extends BaseTest {
 		String[] orderNumberSplit = checkoutPage.getOrderNumber(driver).split(": ", 2);
 		String orderNumber = orderNumberSplit[1];
 
-		log.info("Pre-condition - Step 05: open My account page ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: open My account page ");
 		checkoutPage.openHeaderFooterPageByText(driver, "My account");
 		myAccountPage = PageGeneratorManager.getMyAccountPageObject(driver);
 		myAccountPage.openSidePageByText(driver, "Orders");
@@ -343,44 +355,46 @@ public class Module_07_Order extends BaseTest {
 	}
 
 	@Test
-	public void TC_06_Check_out_Payment_With_Card() {
-		log.info("Pre-condition - Step 04: Go to product sub category page");
+	public void TC_06_Check_out_Payment_With_Card(Method method) {
+		ExtentTestManager.startTest(method.getName(), "Checkout payment with card");
+
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 04: Go to product sub category page");
 		productDetailPage.openTopMenuSubPageByText(driver, "Computers", "Notebooks");
 		Product_CatergoryListPage = PageGeneratorManager.getProduct_CatergoryListPage(driver);
 
-		log.info("Pre-condition - Step 05: Open a product detail page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Open a product detail page");
 		Product_CatergoryListPage.clickToProductTitleByText(driver, "Apple MacBook Pro 13-inch");
 		productDetailPage = PageGeneratorManager.getProductDetailPageObject(driver);
 
-		log.info("Pre-condition - Step 05: Click to Add to cart button ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Click to Add to cart button ");
 		productDetailPage.clickToButtonByText(driver, "Add to cart");
 
-		log.info("Pre-condition - Step 05: Open Shopping cart ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Open Shopping cart ");
 		productDetailPage.openHeaderFooterPageByText(driver, "Shopping cart");
 
-		log.info("Pre-condition - Step 05: Open Shopping cart ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Open Shopping cart ");
 		productDetailPage.clicktoLinkByText(driver, " Estimate shipping ");
 
-		log.info("Pre-condition - Step 05: Select Country ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Select Country ");
 		productDetailPage.selectOptionInDropdownByText(driver, "CountryId", "Viet Nam");
 
-		log.info("Pre-condition - Step 05: Enter zipcode ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Enter zipcode ");
 		productDetailPage.enterTextToTextboxByName(driver, "ZipPostalCode", "55000");
 		productDetailPage.sleepInSecond(3);
-		log.info("Pre-condition - Step 05: Click Apply button");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Click Apply button");
 		productDetailPage.clickToButtonByText(driver, "Apply");
 
-		log.info("Pre-condition - Step 05: Check to agree to service term checkbox ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Check to agree to service term checkbox ");
 		productDetailPage.checkToCheckboxByLabel(driver,
 				"I agree with the terms of service and I adhere to them unconditionally");
 
-		log.info("Pre-condition - Step 05: Click Checkout button ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Click Checkout button ");
 		productDetailPage.clickToButtonByText(driver, " Checkout ");
 		checkoutPage = PageGeneratorManager.getCheckoutPage(driver);
 		checkoutPage.uncheckToCheckboxByLabel(driver, "Ship to the same address");
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-billing", "Continue");
 
-		log.info("Pre-condition - Step 05: Enter info in Shipping Address ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Enter info in Shipping Address ");
 		checkoutPage.selectOptionInDropdownByText(driver, "shipping_address_id", "New Address");
 		checkoutPage.sleepInSecond(3);
 
@@ -395,23 +409,23 @@ public class Module_07_Order extends BaseTest {
 		checkoutPage.enterTextToTextboxByName(driver, "ShippingNewAddress.PhoneNumber", phoneNumber);
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-shipping", "Continue");
 
-		log.info("Pre-condition - Step 05: Select shipping method ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Select shipping method ");
 
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-shipping_method", "Continue");
 
-		log.info("Pre-condition - Step 05: Select payment method ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Select payment method ");
 
 		checkoutPage.clickToRadioButtonByLabel(driver, "Credit Card");
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-payment_method", "Continue");
 
-		log.info("Pre-condition - Step 05: Enter payment info ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Enter payment info ");
 		checkoutPage.enterTextToTextboxByName(driver, "CardholderName", userName);
 		checkoutPage.enterTextToTextboxByName(driver, "CardNumber", cardNumber);
 		checkoutPage.selectOptionInDropdownByText(driver, "ExpireMonth", "08");
 		checkoutPage.enterTextToTextboxByName(driver, "CardCode", "123");
 		checkoutPage.clickToButtonAtCheckoutPage(driver, "opc-payment_info", "Continue");
 
-		log.info("Pre-condition - Step 05: Verify Billing address info");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Verify Billing address info");
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "name"), firstName + " " + lastName);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "email"), "Email: " + emailAddress);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "phone"), "Phone: " + phoneNumber);
@@ -420,7 +434,7 @@ public class Module_07_Order extends BaseTest {
 				city + "," + zipcode);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "billing-info", "country"), country1);
 
-		log.info("Pre-condition - Step 05: Verify Shipping address info");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Verify Shipping address info");
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "name"), userName);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "email"), "Email: " + emailAddress);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "phone"), "Phone: " + phoneNumber);
@@ -429,10 +443,10 @@ public class Module_07_Order extends BaseTest {
 				city + "," + state2 + "," + zipcode);
 		verifyEquals(checkoutPage.getAddressValueByText(driver, "shipping-info", "country"), country2);
 
-		log.info("Pre-condition - Step 05: Verify Payment method");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Verify Payment method");
 		verifyEquals(checkoutPage.getPaymentMethodType(driver), "Credit Card");
 
-		log.info("Pre-condition - Step 05: Verify Shipping method");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: Verify Shipping method");
 		verifyEquals(checkoutPage.getShippingMethodType(driver), "Ground");
 		verifyEquals(checkoutPage.getValueInTableAtColumnTableAndRowIndex(driver, "SKU", "1"), SKU);
 		verifyEquals(checkoutPage.getValueInTableAtColumnTableAndRowIndex(driver, "Product(s)", "1"), productName);
@@ -446,7 +460,7 @@ public class Module_07_Order extends BaseTest {
 		verifyEquals(checkoutPage.getOrderSummaryInfo(driver, "tax-value"), "$0.00");
 		verifyEquals(checkoutPage.getOrderSummaryInfo(driver, "order-total"), Total);
 
-		log.info("Pre-condition - Step 05: click Confirm button ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: click Confirm button ");
 		checkoutPage.clickToButtonByText(driver, "Confirm");
 
 		verifyEquals(checkoutPage.getOrderSuccessfullyMsg(driver), "Your order has been successfully processed!");
@@ -454,7 +468,7 @@ public class Module_07_Order extends BaseTest {
 		String[] orderNumberSplit = checkoutPage.getOrderNumber(driver).split(": ", 2);
 		String orderNumber = orderNumberSplit[1];
 
-		log.info("Pre-condition - Step 05: open My account page ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: open My account page ");
 		checkoutPage.openHeaderFooterPageByText(driver, "My account");
 		myAccountPage = PageGeneratorManager.getMyAccountPageObject(driver);
 		myAccountPage.openSidePageByText(driver, "Orders");
@@ -463,7 +477,7 @@ public class Module_07_Order extends BaseTest {
 		verifyEquals(OrderHistoryPage.getOrderNumber(driver), "Order Number: " + orderNumber);
 		OrderHistoryPage.clickToDetailOrderByText(driver, orderNumber);
 
-		log.info("Pre-condition - Step 05: open My account page ");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 05: open My account page ");
 		checkoutPage.openHeaderFooterPageByText(driver, "My account");
 		myAccountPage = PageGeneratorManager.getMyAccountPageObject(driver);
 		myAccountPage.openSidePageByText(driver, "Orders");

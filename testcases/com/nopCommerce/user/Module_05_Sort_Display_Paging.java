@@ -1,6 +1,5 @@
 package com.nopCommerce.user;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import org.aeonbits.owner.ConfigFactory;
@@ -10,6 +9,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.nopCommerce.common.Common_01_Register_to_system;
 
 import commons.BaseTest;
@@ -23,6 +23,7 @@ import pageObjects.nopCommerce.user.ProductDetailPO;
 import pageObjects.nopCommerce.user.SearchPO;
 import pageObjects.nopCommerce.user.TopMenuSubPagePO;
 import pageObjects.nopCommerce.user.registerPO;
+import reportConfig.ExtentTestManager;
 
 public class Module_05_Sort_Display_Paging extends BaseTest {
 	Enviroment enviroment;
@@ -46,16 +47,17 @@ public class Module_05_Sort_Display_Paging extends BaseTest {
 		enviroment = ConfigFactory.create(Enviroment.class);
 		emailAddress = Common_01_Register_to_system.emailAddress;
 		password = Common_01_Register_to_system.password;
-		
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '" + enviroment.userAppUrl() + "' ");
+
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '"
+				+ enviroment.userAppUrl() + "' ");
 		driver = getBrowserDriver(envName, enviroment.userAppUrl(), browserName, ipAddress, portNumber, osName);
 		homePage = PageGeneratorManager.getHompageObject(driver);
 
-		log.info("Pre-condition - Step 02: Open 'Login' page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 02: Open 'Login' page");
 		homePage.openHeaderFooterPageByText(driver, "Log in");
 		loginPage = PageGeneratorManager.getLoginPageObject(driver);
 
-		log.info("Pre-condition - Step 03: Set cookies and reload page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 03: Set cookies and reload page");
 		loginPage.setCookies(driver, Common_01_Register_to_system.loginPageCookie);
 
 		loginPage.refreshCurrentPage(driver);
@@ -101,12 +103,12 @@ public class Module_05_Sort_Display_Paging extends BaseTest {
 	public void TC_05_Display_3_items_per_page() {
 		homePage.selectOptionInDropdownByText(driver, "products-pagesize", "3");
 
-		log.info("Verify 3 items or less than 3 item per page");
+		ExtentTestManager.getTest().log(Status.INFO, "Verify 3 items or less than 3 item per page");
 		verifyTrue(homePage.isNumberOfProductsCorrect(driver, 3));
 
-		log.info("Verify next icon at page 1 ");
+		ExtentTestManager.getTest().log(Status.INFO, "Verify next icon at page 1 ");
 		verifyTrue(homePage.isNextIconDisplayed(driver));
-		log.info("Verify previous icon at page 2 ");
+		ExtentTestManager.getTest().log(Status.INFO, "Verify previous icon at page 2 ");
 		verifyTrue(homePage.isPreviousIconDisplayed(driver));
 	}
 
@@ -114,10 +116,10 @@ public class Module_05_Sort_Display_Paging extends BaseTest {
 	public void TC_06_Display_6_items_per_page() {
 		homePage.selectOptionInDropdownByText(driver, "products-pagesize", "6");
 
-		log.info("Verify 6 items or less than 6 item per page");
+		ExtentTestManager.getTest().log(Status.INFO, "Verify 6 items or less than 6 item per page");
 		verifyTrue(homePage.isNumberOfProductsCorrect(driver, 6));
 
-		log.info("Verify paging is not displayed");
+		ExtentTestManager.getTest().log(Status.INFO, "Verify paging is not displayed");
 		verifyTrue(homePage.isPagingUndisplayed(driver));
 
 	}
@@ -126,10 +128,10 @@ public class Module_05_Sort_Display_Paging extends BaseTest {
 	public void TC_07_Display_9_items_per_page() {
 		homePage.selectOptionInDropdownByText(driver, "products-pagesize", "9");
 
-		log.info("Verify 9 items or less than 9 item per page");
+		ExtentTestManager.getTest().log(Status.INFO, "Verify 9 items or less than 9 item per page");
 		verifyTrue(homePage.isNumberOfProductsCorrect(driver, 9));
 
-		log.info("Verify paging is not displayed");
+		ExtentTestManager.getTest().log(Status.INFO, "Verify paging is not displayed");
 		verifyTrue(homePage.isPagingUndisplayed(driver));
 	}
 

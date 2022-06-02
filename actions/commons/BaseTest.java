@@ -1,6 +1,5 @@
 package commons;
 
-import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.logging.Log;
@@ -10,7 +9,6 @@ import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.testng.Assert;
 import org.testng.Reporter;
-import org.testng.annotations.BeforeTest;
 import factoryEnviroment.GridFactory;
 import factoryEnviroment.LocalFactory;
 import factoryEnviroment.SaucelabFactory;
@@ -21,6 +19,10 @@ public class BaseTest {
 
 	protected BaseTest() {
 		log = LogFactory.getLog(getClass());
+	}
+
+	public WebDriver getDriverInstance() {
+		return this.driver;
 	}
 
 	protected WebDriver getBrowserDriver(String envName, String severName, String browserName, String ipAddress,
@@ -58,8 +60,8 @@ public class BaseTest {
 			pass = false;
 
 			// Add lỗi vào ReportNG
-			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
-			Reporter.getCurrentTestResult().setThrowable(e);
+//			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
+//			Reporter.getCurrentTestResult().setThrowable(e);
 		}
 		return pass;
 	}
@@ -75,8 +77,8 @@ public class BaseTest {
 			Assert.assertFalse(condition);
 		} catch (Throwable e) {
 			pass = false;
-			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
-			Reporter.getCurrentTestResult().setThrowable(e);
+//			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
+//			Reporter.getCurrentTestResult().setThrowable(e);
 		}
 		return pass;
 	}
@@ -99,30 +101,26 @@ public class BaseTest {
 		return checkEquals(actual, expected);
 	}
 
-	public WebDriver getWebDriver() {
-		return this.driver;
-	}
-
-	@BeforeTest
-	public void deleteAllFilesInReportNGScreenshot() {
-		log.info("---------- START delete file in folder ----------");
-
-		try {
-			String workingDir = System.getProperty("user.dir");
-			String pathFolderDownload = workingDir + "/allure-results";
-			File file = new File(pathFolderDownload);
-			File[] listOfFiles = file.listFiles();
-			for (int i = 0; i < listOfFiles.length; i++) {
-				if (listOfFiles[i].isFile()) {
-					System.out.println(listOfFiles[i].getName());
-					new File(listOfFiles[i].toString()).delete();
-				}
-			}
-		} catch (Exception e) {
-			System.out.print(e.getMessage());
-		}
-		log.info("---------- END delete file in folder ----------");
-	}
+//	@BeforeTest
+//	public void deleteAllFilesInReportNGScreenshot() {
+//		log.info("---------- START delete file in folder ----------");
+//
+//		try {
+//			String workingDir = System.getProperty("user.dir");
+//			String pathFolderDownload = workingDir + "/allure-results";
+//			File file = new File(pathFolderDownload);
+//			File[] listOfFiles = file.listFiles();
+//			for (int i = 0; i < listOfFiles.length; i++) {
+//				if (listOfFiles[i].isFile()) {
+//					System.out.println(listOfFiles[i].getName());
+//					new File(listOfFiles[i].toString()).delete();
+//				}
+//			}
+//		} catch (Exception e) {
+//			System.out.print(e.getMessage());
+//		}
+//		log.info("---------- END delete file in folder ----------");
+//	}
 
 	protected void showBrowserConsoleLogs(WebDriver driver) {
 		if (driver.toString().contains("chrome")) {

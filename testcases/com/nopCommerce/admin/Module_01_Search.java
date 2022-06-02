@@ -9,6 +9,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+
 import commons.BaseTest;
 import commons.PageGeneratorManager;
 import enviromentConfig.Enviroment;
@@ -16,6 +18,7 @@ import pageObjects.nopCommerce.admin.HomepageAdminPO;
 import pageObjects.nopCommerce.admin.LoginAdminPO;
 import pageObjects.nopCommerce.admin.ProductDetailPO;
 import pageObjects.nopCommerce.admin.ProductListPO;
+import reportConfig.ExtentTestManager;
 
 public class Module_01_Search extends BaseTest {
 	Enviroment enviroment;
@@ -38,19 +41,19 @@ public class Module_01_Search extends BaseTest {
 		price = "500";
 		stockQuantity = "10000";
 
-		log.info("Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '"
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 01: Open browser '" + browserName + "' and navigate to '"
 				+ enviroment.adminAppUrl() + "' ");
 
 		driver = getBrowserDriver(envName, enviroment.adminAppUrl(), browserName, ipAddress, portNumber, osName);
 		adminLoginPage = PageGeneratorManager.getLoginAdminPage(driver);
 
-		log.info("Pre-condition - Step 02: Login with Admin account");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 02: Login with Admin account");
 		adminLoginPage.enterTextToTextboxByName(driver, "Email", enviroment.adminAppname());
 		adminLoginPage.enterTextToTextboxByName(driver, "Password", enviroment.adminAppPassword());
 		adminLoginPage.clickToButtonByText(driver, "Log in");
 		homePage = PageGeneratorManager.gethomepageAdmin(driver);
 
-		log.info("Pre-condition - Step 03: Open Products page");
+		ExtentTestManager.getTest().log(Status.INFO, "Pre-condition - Step 03: Open Products page");
 		homePage.openSideMenuPageByText(driver, "Catalog");
 		homePage.openSubSideMenuPageByText(driver, " Products");
 		productListPage = PageGeneratorManager.getProductListPage(driver);
@@ -58,11 +61,11 @@ public class Module_01_Search extends BaseTest {
 
 	@Test
 	public void TC_01_Search() {
-		log.info("Search 01 - Step 1: Enter text into product name textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
-		log.info("Search 01 - Step 2: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
-		log.info("Search 01 - Step 3: Verify search info");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 3: Verify search info");
 		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
 				"products-grid_wrapper", "Product name", "1"), productName);
 		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
@@ -76,29 +79,29 @@ public class Module_01_Search extends BaseTest {
 
 	@Test
 	public void TC_02_Search_With_Product_Name_ParentCategory_Unchecked() {
-		log.info("Search 01 - Step 1: Enter text into product name textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
 		
 		productListPage.selectOptionInDropdownByText(driver, "SearchCategoryId", "Computers");
 		productListPage.uncheckToCheckboxByLabelOnAdminPage(driver, "SearchIncludeSubCategories");
 		
-		log.info("Search 01 - Step 2: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
 
-		log.info("Search 02 - Verify no data message");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 02 - Verify no data message");
 
 		verifyEquals(productListPage.getEmptyMsgAtTableByText(driver,"products-grid_wrapper"), "No data available in table");
 	}
 
 	@Test
 	public void TC_03_Search_With_Product_Name_ParentCategory_Checked() {
-		log.info("Search 01 - Step 1: Enter text into product name textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
 		productListPage.selectOptionInDropdownByText(driver, "SearchCategoryId", "Computers");
 		productListPage.checkToCheckboxByLabelOnAdminPage(driver, "SearchIncludeSubCategories");
-		log.info("Search 01 - Step 2: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
-		log.info("Search 03 - Verify search info");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 03 - Verify search info");
 		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
 				"products-grid_wrapper", "Product name", "1"), productName);
 		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
@@ -112,13 +115,13 @@ public class Module_01_Search extends BaseTest {
 
 	@Test
 	public void TC_04_Search_With_Product_Name_Child_Category() {
-		log.info("Search 01 - Step 1: Enter text into product name textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
 		productListPage.selectOptionInDropdownByText(driver, "SearchCategoryId", "Computers >> Desktops");
 		productListPage.checkToCheckboxByLabelOnAdminPage(driver, "SearchIncludeSubCategories");
-		log.info("Search 01 - Step 2: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
-		log.info("Search 04 - Verify search info");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 04 - Verify search info");
 		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
 				"products-grid_wrapper", "Product name", "1"), productName);
 		verifyEquals(productListPage.getValueInTableAtColumnTableAndRowIndexAndCardTitle(driver,
@@ -132,28 +135,28 @@ public class Module_01_Search extends BaseTest {
 
 	@Test
 	public void TC_05_Search_With_Manufactuters() {
-		log.info("Search 01 - Step 1: Enter text into product name textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 1: Enter text into product name textbox");
 		productListPage.enterTextToTextboxByName(driver, "SearchProductName", productName);
 		productListPage.selectOptionInDropdownByText(driver, "SearchCategoryId", "All");
 		productListPage.checkToCheckboxByLabelOnAdminPage(driver, "SearchIncludeSubCategories");
 		productListPage.selectOptionInDropdownByText(driver, "SearchManufacturerId", "Apple");
-		log.info("Search 01 - Step 2: Click search button");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 01 - Step 2: Click search button");
 		productListPage.clickToButtonByText(driver, "Search");
-		log.info("Search 05 - Verify no data message");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 05 - Verify no data message");
 
 		verifyEquals(productListPage.getEmptyMsgAtTableByText(driver,"products-grid_wrapper"), "No data available in table");
 	}
 
 	@Test
 	public void TC_06_Search_With_SKU() {
-		log.info("Search 06 - Step 1: Enter text into SKU textbox");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 06 - Step 1: Enter text into SKU textbox");
 		productListPage.enterTextToTextboxByName(driver, "GoDirectlyToSku", SKU);
 		
-		log.info("Search 06 - Step 2: Click Go button");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 06 - Step 2: Click Go button");
 		productListPage.clickToButtonByText(driver, "Go");
 		ProductDetailPage = PageGeneratorManager.getProductDetailPageAdmin(driver);
 		
-		log.info("Search 06 - Step 3: Verify product detail page displays");
+		ExtentTestManager.getTest().log(Status.INFO, "Search 06 - Step 3: Verify product detail page displays");
 		verifyTrue(productListPage.isPageTitleDisplayed(driver,"Lenovo IdeaCentre 600 All-in-One PC"));
 		verifyEquals(productListPage.getTextboxValueByName(driver, "Name"), "Lenovo IdeaCentre 600 All-in-One PC");
 	}
